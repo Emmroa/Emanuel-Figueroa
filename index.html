@@ -1,0 +1,2477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Emanuel Figueroa — Operations, Data & Practical AI</title>
+<meta name="description" content="Operations and process professional based in Auckland, New Zealand. Tableau dashboards, AI tools, and durable systems. Available for contract work." />
+<meta name="theme-color" content="#F1ECE2" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Emanuel Figueroa — single-file portfolio
+     Aesthetic: editorial / archival, cream paper + ink, terracotta + pounamu
+     ============================================================ */
+
+  :root{
+    --paper:        #F1ECE2;   /* warm cream */
+    --paper-2:      #E8E1D2;   /* slightly deeper */
+    --paper-3:      #DCD3BF;   /* rule lines / chips */
+    --ink:          #18130E;   /* near-black, warm */
+    --ink-2:        #3B342B;   /* secondary text */
+    --ink-3:        #6E6557;   /* muted */
+    --clay:         #B85436;   /* terracotta accent */
+    --clay-deep:    #8E3F27;
+    --pounamu:      #2E4A3A;   /* deep forest / NZ green */
+    --pounamu-2:    #4A6B57;
+    --gold:         #B68A3E;   /* archive gold */
+    --night:        #0E1310;   /* near-black for Nova feature */
+    --night-2:      #1A2118;
+    --max:          1240px;
+    --gutter:       clamp(20px, 5vw, 64px);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope', system-ui, -apple-system, sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-feature-settings:'ss01','cv11';
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--ink); color:var(--paper); }
+
+  /* paper grain */
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:1;
+    opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* layout helpers */
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--gutter); position:relative; z-index:2; }
+  .row{ display:grid; gap:clamp(24px,4vw,48px); }
+  .rule{ height:1px; background:var(--paper-3); border:0; }
+
+  /* type system */
+  .display{
+    font-family:'Instrument Serif','Fraunces',Georgia,serif;
+    font-weight:400;
+    font-style:italic;
+    line-height:.92;
+    letter-spacing:-.01em;
+  }
+  .display-roman{
+    font-family:'Instrument Serif','Fraunces',Georgia,serif;
+    font-style:normal;
+    font-weight:400;
+    line-height:.95;
+    letter-spacing:-.015em;
+  }
+  .mono{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-feature-settings:'ss01','ss02';
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .lead{
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(22px,2.5vw,30px);
+    line-height:1.32;
+    font-style:italic;
+    color:var(--ink-2);
+    text-wrap:pretty;
+  }
+
+  /* =========================================================
+     Top bar
+     ========================================================= */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:saturate(140%) blur(8px);
+    -webkit-backdrop-filter:saturate(140%) blur(8px);
+    background:color-mix(in oklab, var(--paper) 82%, transparent);
+    border-bottom:1px solid color-mix(in oklab, var(--paper-3) 70%, transparent);
+  }
+  .topbar-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 0;
+  }
+  .mark{ display:flex; align-items:baseline; gap:10px; }
+  .mark-glyph{
+    font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+    font-size:22px; line-height:1; color:var(--clay);
+  }
+  .mark-name{
+    font-family:'Instrument Serif',Georgia,serif; font-size:18px; letter-spacing:.01em;
+  }
+  .nav{ display:flex; gap:22px; }
+  .nav a{
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--ink-2);
+    padding:6px 2px; border-bottom:1px solid transparent;
+    transition:border-color .25s, color .25s;
+  }
+  .nav a:hover{ color:var(--ink); border-color:var(--clay); }
+  @media (max-width:720px){ .nav{ display:none; } }
+
+  /* =========================================================
+     Hero
+     ========================================================= */
+  .hero{
+    padding:clamp(60px,11vw,140px) 0 clamp(60px,9vw,110px);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:48px;
+  }
+  @media (min-width:980px){
+    .hero-grid{ grid-template-columns:1.4fr 1fr; align-items:end; }
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:14px 28px; align-items:center;
+    margin-bottom:32px;
+  }
+  .hero-meta span{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .hero-meta .dot{ width:6px; height:6px; border-radius:50%; background:var(--clay); display:inline-block; margin-right:8px; vertical-align:middle; }
+  .available{ color:var(--pounamu); }
+
+  .hero h1{
+    margin:0;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-weight:400; font-style:normal;
+    font-size:clamp(64px, 13vw, 184px);
+    line-height:.88;
+    letter-spacing:-.02em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--clay);
+  }
+  .hero-sub{
+    margin-top:28px;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-style:italic;
+    font-size:clamp(22px,2.6vw,32px);
+    line-height:1.3;
+    color:var(--ink-2);
+    max-width:30ch;
+    text-wrap:balance;
+  }
+  .hero-side{
+    display:flex; flex-direction:column; gap:24px;
+    padding-bottom:8px;
+  }
+  .hero-card{
+    border:1px solid var(--paper-3);
+    background:color-mix(in oklab, var(--paper) 80%, white 20%);
+    padding:22px 22px 20px;
+  }
+  .hero-card h4{
+    margin:0 0 10px 0;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:500;
+  }
+  .hero-card p{ margin:0; font-size:15px; line-height:1.5; color:var(--ink-2); }
+  .hero-card a{ border-bottom:1px solid var(--paper-3); }
+  .hero-card a:hover{ border-color:var(--clay); color:var(--clay); }
+
+  .hero-ticker{
+    margin-top:48px;
+    display:flex; flex-wrap:wrap; gap:18px 32px;
+    padding-top:24px;
+    border-top:1px solid var(--paper-3);
+  }
+  .ticker-item{ display:flex; flex-direction:column; gap:2px; }
+  .ticker-item .v{ font-family:'Instrument Serif',Georgia,serif; font-size:32px; line-height:1; color:var(--ink); }
+  .ticker-item .l{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3); }
+
+  /* corner ornament */
+  .corner-tag{
+    position:absolute; top:24px; right:var(--gutter);
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--ink-3);
+    display:flex; gap:8px; align-items:center;
+  }
+  .corner-tag::before{ content:''; width:24px; height:1px; background:var(--ink-3); }
+
+  /* =========================================================
+     Section headers
+     ========================================================= */
+  section{ padding:clamp(60px,10vw,120px) 0; position:relative; }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:24px; margin-bottom:48px; flex-wrap:wrap;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--paper-3);
+  }
+  .section-head h2{
+    margin:0;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-style:italic;
+    font-size:clamp(40px,6vw,72px);
+    line-height:.95;
+    letter-spacing:-.01em;
+  }
+  .section-head h2 .num{
+    font-style:normal;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--clay); vertical-align:top;
+    margin-right:18px;
+  }
+  .section-head .aside{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3);
+  }
+
+  /* =========================================================
+     About
+     ========================================================= */
+  .about-grid{
+    display:grid; gap:48px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:880px){ .about-grid{ grid-template-columns:1fr 1fr; gap:64px; } }
+  .about p{
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(20px,2.1vw,26px); line-height:1.45;
+    color:var(--ink); margin:0 0 18px 0;
+    text-wrap:pretty;
+  }
+  .about p.muted{ color:var(--ink-2); }
+  .about-side{
+    border-left:1px solid var(--paper-3);
+    padding-left:32px;
+  }
+  @media (max-width:879px){ .about-side{ border-left:0; padding-left:0; padding-top:24px; border-top:1px solid var(--paper-3); } }
+  .about-side h5{
+    margin:0 0 8px 0;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:500;
+  }
+  .about-side p{
+    font-family:'Manrope',sans-serif; font-size:15px; line-height:1.55; color:var(--ink-2);
+    margin:0 0 22px 0;
+  }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pill{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em;
+    padding:6px 11px; border:1px solid var(--paper-3); border-radius:999px;
+    color:var(--ink-2); background:transparent;
+  }
+
+  /* =========================================================
+     Work — gallery
+     ========================================================= */
+  .work-intro{
+    font-family:'Instrument Serif',Georgia,serif;
+    font-style:italic;
+    font-size:clamp(22px,2.4vw,28px);
+    line-height:1.35;
+    color:var(--ink-2);
+    max-width:50ch; margin:-24px 0 56px;
+    text-wrap:pretty;
+  }
+  .work{ display:flex; flex-direction:column; gap:clamp(48px,7vw,96px); }
+  .work-item{
+    display:grid; gap:clamp(24px,4vw,56px);
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  @media (min-width:900px){
+    .work-item{ grid-template-columns:1.15fr 1fr; }
+    .work-item.reverse{ grid-template-columns:1fr 1.15fr; }
+    .work-item.reverse .work-vis{ order:2; }
+  }
+  .work-vis{
+    background:#fff;
+    border:1px solid var(--paper-3);
+    padding:18px;
+    position:relative;
+    aspect-ratio:16/11;
+    overflow:hidden;
+  }
+  .work-vis::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 70%, rgba(24,19,14,.05));
+  }
+
+  /* ---- Scroll-linked "live" dashboard animations ---------------- */
+  /* Each .work-vis SVG has elements with these classes; we drive
+     them via a --p (progress 0→1) CSS variable updated on scroll. */
+  .work-vis{ --p:0; }
+  .work-vis .grow-y{
+    transform-box:fill-box; transform-origin:bottom center;
+    transform:scaleY(calc(0.04 + var(--p) * 0.96));
+    transition:transform .3s linear;
+  }
+  .work-vis .grow-x{
+    transform-box:fill-box; transform-origin:left center;
+    transform:scaleX(calc(0.04 + var(--p) * 0.96));
+    transition:transform .3s linear;
+  }
+  .work-vis .draw{
+    stroke-dasharray:var(--len,1200);
+    stroke-dashoffset:calc(var(--len,1200) * (1 - var(--p)));
+    transition:stroke-dashoffset .3s linear;
+  }
+  .work-vis .fade-in{
+    opacity:calc(0.15 + var(--p) * 0.85);
+    transition:opacity .25s linear;
+  }
+  .work-vis .pop{
+    transform-box:fill-box; transform-origin:center;
+    transform:scale(calc(0.4 + var(--p) * 0.6));
+    opacity:calc(0.2 + var(--p) * 0.8);
+    transition:transform .3s linear, opacity .25s linear;
+  }
+  /* Live indicator (HTML overlay on top of SVG) */
+  .live-tag{
+    position:absolute; top:10px; right:10px;
+    display:flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.18em;
+    color:#1f3b73; text-transform:uppercase;
+    background:rgba(255,255,255,.92); border:1px solid #e6e6e6;
+    padding:4px 8px; border-radius:4px; z-index:3;
+  }
+  .live-tag::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:#22a06b; box-shadow:0 0 6px rgba(34,160,107,.7);
+    animation:livepulse 1.6s ease-in-out infinite;
+  }
+  @keyframes livepulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:.4; transform:scale(.7); }
+  }
+  /* tooltip that drifts across the dashboard */
+  .work-vis .tip{
+    opacity:0;
+    transition:opacity .4s ease;
+  }
+  .work-vis.is-live .tip{ animation:tipdrift 7s ease-in-out infinite; }
+  @keyframes tipdrift{
+    0%, 100% { opacity:0; }
+    20%, 60% { opacity:1; }
+  }
+  /* Ticker bar above the dashboard */
+  .vis-shell{ position:relative; }
+  .vis-ticker{
+    position:absolute; top:0; left:0; right:0;
+    height:22px; background:#13135a;
+    overflow:hidden; z-index:2;
+    border-bottom:1px solid #0a0a3a;
+    display:none;
+  }
+  .vis-ticker .strip{
+    display:flex; gap:48px; white-space:nowrap;
+    font-family:'JetBrains Mono', monospace; font-size:10px;
+    color:#cfd6f5; letter-spacing:.14em; line-height:22px;
+    padding-left:100%;
+    animation:tick 28s linear infinite;
+  }
+  .vis-ticker .strip span b{ color:#ffd66b; font-weight:500; }
+  .vis-ticker .strip span i{ color:#6fbf8f; font-style:normal; }
+  .vis-ticker .strip span u{ color:#ff8c79; font-style:normal; text-decoration:none; }
+  @keyframes tick{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* counting numbers */
+  .countup{ font-variant-numeric:tabular-nums; }
+
+  /* cursor that drifts on the map */
+  .map-cursor{
+    transform-box:fill-box; transform-origin:center;
+    animation:cursdrift 9s ease-in-out infinite;
+  }
+  @keyframes cursdrift{
+    0%   { transform:translate(0,0); opacity:0; }
+    10%  { opacity:1; }
+    50%  { transform:translate(40px,30px); }
+    90%  { opacity:1; transform:translate(80px,-10px); }
+    100% { transform:translate(80px,-10px); opacity:0; }
+  }
+
+  /* ---- Nova chat mock styles ------------------------------------ */
+  .nova-chat{
+    background:#0a0d0a;
+    border:1px solid #2a3a30;
+    border-radius:14px;
+    overflow:hidden;
+    position:relative;
+    aspect-ratio: 9/14;
+    max-width:420px; margin:0 auto;
+    box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 60px rgba(111,191,143,.08) inset;
+    display:flex; flex-direction:column;
+  }
+  @media (min-width:980px){ .nova-chat{ max-width:none; aspect-ratio:auto; min-height:640px; } }
+
+  /* constellation canvas */
+  .nova-chat .stars{
+    position:absolute; inset:0; z-index:0;
+    background:radial-gradient(120% 80% at 50% 60%, rgba(74,107,87,.12), transparent 70%), #0a0d0a;
+  }
+  .nova-chat .stars canvas{ width:100%; height:100%; display:block; }
+
+  .chat-top{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px;
+    border-bottom:1px solid rgba(42,58,48,.6);
+    background:linear-gradient(180deg, rgba(10,13,10,.96), rgba(10,13,10,.7));
+  }
+  .chat-brand{ display:flex; align-items:center; gap:10px; }
+  .chat-brand-mark{
+    width:38px; height:38px; border-radius:9px;
+    background:radial-gradient(circle at 30% 30%, #6FBF8F, #2E4A3A 70%);
+    display:flex; align-items:center; justify-content:center;
+    color:#0E1310; font-family:'Instrument Serif', serif; font-style:italic; font-size:20px;
+    box-shadow:0 0 18px rgba(111,191,143,.35);
+  }
+  .chat-brand-name{ font-family:'Instrument Serif', serif; font-size:18px; color:#E8E3D6; line-height:1; }
+  .chat-brand-name i{ color:#B68A3E; font-style:italic; }
+  .chat-brand-sub{ font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.14em; color:#7BA38A; margin-top:4px; text-transform:uppercase; }
+  .chat-actions{ display:flex; align-items:center; gap:8px; }
+  .chat-btn{
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.1em;
+    padding:6px 10px; border-radius:6px; border:1px solid #2a3a30;
+    color:#A8AC9F; background:transparent; text-transform:uppercase;
+  }
+  .chat-btn.solid{ color:#B68A3E; border-color:#3a3a2a; background:rgba(182,138,62,.06); }
+  @media (max-width:520px){ .chat-btn{ font-size:9px; padding:5px 7px; } .chat-brand-name{ font-size:16px; } }
+
+  .chat-body{
+    position:relative; z-index:2;
+    flex:1; min-height:0;
+    padding:18px 16px 14px;
+    display:flex; flex-direction:column; gap:14px;
+    overflow:hidden;
+  }
+  .bw-card{
+    border:1px solid #2a3a30; border-radius:10px;
+    background:rgba(10,13,10,.4); backdrop-filter:blur(6px);
+    padding:14px;
+  }
+  .bw-head{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;
+  }
+  .bw-head .bw-title{ font-family:'Instrument Serif', serif; font-size:18px; color:#E8E3D6; }
+  .bw-head .bw-x{
+    width:22px; height:22px; border-radius:5px; border:1px solid #2a3a30;
+    color:#7a8278; display:flex; align-items:center; justify-content:center; font-size:11px;
+  }
+  .bw-grid{ display:grid; grid-template-columns:1fr; gap:8px; }
+  @media (min-width:480px){ .bw-grid{ grid-template-columns:repeat(3, 1fr); } }
+  .bw-cell{
+    border-radius:8px; padding:12px; border:1px solid #2a3a30;
+    background:rgba(74,107,87,.06);
+  }
+  .bw-cell .ico{
+    width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center;
+    color:#6FBF8F; margin-bottom:6px;
+  }
+  .bw-cell.alt .ico{ color:#B68A3E; }
+  .bw-cell.crit .ico{ color:#FF7268; }
+  .bw-cell h6{
+    margin:0 0 6px 0;
+    font-family:'Instrument Serif', serif; font-style:normal; font-size:14px;
+    color:#6FBF8F; font-weight:400;
+  }
+  .bw-cell.alt h6{ color:#B68A3E; }
+  .bw-cell.crit h6{ color:#FF7268; }
+  .bw-cell p{ margin:0; font-size:11px; line-height:1.5; color:#9aa099; }
+  .bw-legal{
+    margin-top:12px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size:8px; letter-spacing:.18em; color:#5a6258;
+  }
+  .bw-cta{
+    margin-top:10px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.12em;
+    color:#B68A3E; padding:8px; border:1px solid rgba(182,138,62,.3); border-radius:6px;
+    background:rgba(182,138,62,.04);
+  }
+
+  .msg{ display:flex; gap:10px; align-items:flex-start; max-width:88%; }
+  .msg .ava{
+    flex-shrink:0; width:28px; height:28px; border-radius:7px;
+    background:radial-gradient(circle at 30% 30%, #6FBF8F, #2E4A3A 70%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif', serif; font-style:italic; font-size:14px; color:#0E1310;
+  }
+  .msg .ava.spark{ background:transparent; color:#B68A3E; font-size:18px; line-height:1; }
+  .msg .bub{
+    padding:9px 14px; border-radius:14px;
+    border:1px solid #2a3a30; background:rgba(20,30,22,.85);
+    color:#E8E3D6; font-size:13.5px; line-height:1.4;
+    box-shadow:0 0 18px rgba(111,191,143,.06);
+  }
+  .msg.user{ margin-left:auto; flex-direction:row-reverse; }
+  .msg.user .bub{ background:rgba(46,74,58,.45); border-color:#3a4f42; color:#E8E3D6; }
+  .msg.user .ava{ display:none; }
+  .msg.thinking .bub{ color:#9CB9A5; font-style:italic; }
+  .msg.thinking .bub::after{
+    content:''; display:inline-block; width:6px; height:13px; vertical-align:middle;
+    margin-left:2px; background:#9CB9A5;
+    animation:cursorBlink 1s steps(2) infinite;
+  }
+  @keyframes cursorBlink{ 50%{ opacity:0; } }
+
+  .chat-foot{
+    position:relative; z-index:2;
+    border-top:1px solid rgba(42,58,48,.6);
+    padding:10px 12px 12px;
+    background:linear-gradient(0deg, rgba(10,13,10,.96), rgba(10,13,10,.6));
+  }
+  .crisis-strip{
+    display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
+    gap:6px 14px;
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.06em;
+    color:#7a8278; margin-bottom:10px;
+  }
+  .crisis-strip b{ color:#FF7268; font-weight:500; }
+  .crisis-strip i{ color:#6FBF8F; font-style:normal; }
+  .crisis-strip .sep{ color:#3a3a30; }
+  .chat-input{
+    display:flex; align-items:center; gap:10px;
+    background:rgba(20,30,22,.7); border:1px solid #2a3a30; border-radius:10px;
+    padding:10px 12px;
+  }
+  .chat-input .ph{
+    flex:1; font-size:13px; color:#5a6258;
+  }
+  .chat-input .ph::after{
+    content:''; display:inline-block; width:1.5px; height:14px; background:#7BA38A;
+    vertical-align:middle; margin-left:2px;
+    animation:cursorBlink 1.1s steps(2) infinite;
+  }
+  .chat-input .send{
+    width:30px; height:30px; border-radius:7px; flex-shrink:0;
+    background:rgba(182,138,62,.12); border:1px solid rgba(182,138,62,.3);
+    color:#B68A3E; display:flex; align-items:center; justify-content:center;
+  }
+  .input-help{
+    margin-top:8px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size:8px; letter-spacing:.16em; color:#4a5048;
+    text-transform:uppercase;
+  }
+  .input-help i{ color:#7BA38A; font-style:normal; }
+
+  /* ---- Nova operator analytics mock ---------------------------- */
+  .nova-ops{
+    margin-top:clamp(48px, 6vw, 80px);
+    background:#0a0d0a;
+    border:1px solid #2a3a30;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 60px rgba(111,191,143,.05) inset;
+    position:relative;
+  }
+  .ops-top{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:1px solid #1f2a22;
+    background:linear-gradient(180deg, rgba(20,30,22,.6), rgba(10,13,10,.4));
+    flex-wrap:wrap; gap:12px;
+  }
+  .ops-brand{ display:flex; align-items:center; gap:10px; }
+  .ops-brand-mark{
+    width:32px; height:32px; border-radius:8px;
+    background:radial-gradient(circle at 30% 30%, #6FBF8F, #2E4A3A 70%);
+    color:#0E1310; display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif', serif; font-style:italic; font-size:18px;
+  }
+  .ops-brand-name{ font-family:'Instrument Serif', serif; font-size:16px; color:#E8E3D6; line-height:1; }
+  .ops-brand-name i{ color:#B68A3E; }
+  .ops-brand-sub{ font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.14em; color:#7BA38A; margin-top:4px; text-transform:uppercase; }
+  .ops-meta{ display:flex; align-items:center; gap:8px; }
+  .ops-meta .badge{
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+    border:1px solid #2a3a30; padding:5px 9px; border-radius:6px; color:#A8AC9F;
+  }
+  .ops-meta .badge.live{ color:#6FBF8F; border-color:rgba(111,191,143,.35); }
+  .ops-meta .badge.live::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:#6FBF8F;
+    display:inline-block; margin-right:6px; vertical-align:middle;
+    box-shadow:0 0 8px rgba(111,191,143,.7);
+    animation:livepulse 1.6s ease-in-out infinite;
+  }
+
+  .ops-tabs{
+    display:flex; gap:6px; padding:10px 18px 0;
+    border-bottom:1px solid #1f2a22;
+    flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:.14em;
+    text-transform:uppercase;
+    background:rgba(10,13,10,.6);
+  }
+  .ops-tabs .tab{
+    padding:8px 12px; color:#7a8278; border-bottom:2px solid transparent;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .ops-tabs .tab.active{ color:#6FBF8F; border-bottom-color:#6FBF8F; }
+  .ops-tabs .tab.gold{ color:#B68A3E; }
+  .ops-tabs .tab .dot{ width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+  .ops-body{ padding:clamp(18px, 3vw, 28px); }
+
+  /* KPI strip */
+  .ops-kpis{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:8px;
+    margin-bottom:18px;
+  }
+  @media (min-width:560px){ .ops-kpis{ grid-template-columns:repeat(4, 1fr); } }
+  @media (min-width:900px){ .ops-kpis{ grid-template-columns:repeat(6, 1fr); } }
+  .kpi{
+    border:1px solid #2a3a30; border-radius:8px;
+    padding:14px 14px 12px;
+    background:rgba(74,107,87,.04);
+  }
+  .kpi .v{
+    font-family:'Instrument Serif', serif;
+    font-size:clamp(26px, 3vw, 36px); line-height:1;
+    color:#B68A3E;
+  }
+  .kpi .v.green{ color:#6FBF8F; }
+  .kpi .v.blue{ color:#4a9fd6; }
+  .kpi .l{
+    font-family:'Manrope', sans-serif; font-size:11px; color:#C4C8BD; margin-top:6px; line-height:1.3;
+  }
+  .kpi .s{
+    font-family:'JetBrains Mono', monospace; font-size:9px; color:#7a8278; letter-spacing:.06em;
+    margin-top:4px;
+  }
+  .kpi .s.alert{ color:#FF7268; }
+  .kpi .s.up{ color:#6FBF8F; }
+
+  /* Charts row */
+  .ops-charts{
+    display:grid; gap:14px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:900px){ .ops-charts{ grid-template-columns:1.2fr 1fr; } }
+  .ops-panel{
+    border:1px solid #2a3a30; border-radius:10px;
+    background:rgba(10,13,10,.5);
+    padding:18px;
+  }
+  .ops-panel h5{
+    margin:0 0 4px 0;
+    font-family:'Instrument Serif', serif; font-size:18px; font-weight:400;
+    color:#E8E3D6;
+  }
+  .ops-panel .sub{
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.14em;
+    color:#7a8278; text-transform:uppercase; margin-bottom:14px;
+  }
+  .ops-panel svg{ width:100%; height:auto; display:block; }
+
+  /* Regions grid */
+  .ops-regions{
+    margin-top:14px;
+    display:grid; gap:10px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:560px){ .ops-regions{ grid-template-columns:repeat(2, 1fr); } }
+  @media (min-width:900px){ .ops-regions{ grid-template-columns:repeat(4, 1fr); } }
+  .region{
+    border:1px solid #2a3a30; border-radius:10px;
+    padding:14px; background:rgba(74,107,87,.04);
+    position:relative;
+  }
+  .region.crit{ border-color:rgba(255,114,104,.35); background:rgba(255,114,104,.03); }
+  .region.warn{ border-color:rgba(182,138,62,.3); background:rgba(182,138,62,.03); }
+  .region-tag{
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.18em; color:#7BA38A;
+  }
+  .region.crit .region-tag{ color:#FF7268; }
+  .region.warn .region-tag{ color:#B68A3E; }
+  .region-name{
+    font-family:'Instrument Serif', serif; font-size:16px; color:#E8E3D6; margin:2px 0 12px;
+  }
+  .region-stats{ display:flex; gap:6px; margin-bottom:10px; }
+  .region-stats .s{
+    flex:1; border:1px solid #2a3a30; border-radius:6px; padding:8px 0; text-align:center;
+  }
+  .region-stats .s .n{
+    font-family:'Instrument Serif', serif; font-size:18px; color:#E8E3D6; line-height:1;
+  }
+  .region.warn .region-stats .s.sdhi .n{ color:#B68A3E; }
+  .region.crit .region-stats .s.sdhi .n{ color:#FF7268; }
+  .region-stats .s .lab{
+    font-family:'JetBrains Mono', monospace; font-size:8px; color:#7a8278;
+    letter-spacing:.1em; margin-top:3px; text-transform:uppercase;
+  }
+  .region-bar{
+    height:4px; background:#1a2218; border-radius:2px; overflow:hidden; margin-bottom:6px;
+  }
+  .region-bar .fill{ height:100%; background:#6FBF8F; transition:width .6s ease; }
+  .region.warn .region-bar .fill{ background:#B68A3E; }
+  .region.crit .region-bar .fill{ background:#FF7268; }
+  .region-note{
+    font-family:'JetBrains Mono', monospace; font-size:9px; color:#7a8278; letter-spacing:.04em;
+  }
+  .region.crit .region-note{ color:#FF7268; }
+
+  .ops-foot{
+    margin-top:18px; padding-top:14px;
+    border-top:1px solid #1f2a22;
+    display:flex; flex-wrap:wrap; gap:8px 18px;
+    font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:.14em;
+    color:#5a6258; text-transform:uppercase;
+  }
+  .ops-foot b{ color:#7BA38A; font-weight:500; }
+
+  .work-num{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--clay); margin-bottom:14px;
+  }
+  .work-title{
+    margin:0 0 12px 0;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(32px,4.2vw,52px);
+    line-height:1.02; letter-spacing:-.01em;
+  }
+  .work-title em{ font-style:italic; color:var(--clay-deep); }
+  .work-kicker{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:10px;
+  }
+  .work-body{
+    font-size:16px; line-height:1.6; color:var(--ink-2);
+    max-width:48ch; margin:0 0 18px 0;
+  }
+  .work-meta{
+    display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px 0;
+  }
+  .work-meta .pill{ font-size:10px; }
+  .work-link{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    border-bottom:1px solid var(--ink); padding-bottom:4px;
+    transition:gap .2s, color .2s, border-color .2s;
+  }
+  .work-link:hover{ gap:14px; color:var(--clay); border-color:var(--clay); }
+  .work-link .arrow{ display:inline-block; transition:transform .2s; }
+  .work-link:hover .arrow{ transform:translateX(2px); }
+  .work-links{ display:flex; flex-wrap:wrap; gap:18px 28px; }
+
+  /* =========================================================
+     Nova feature block — dark, echoes the real product
+     ========================================================= */
+  .nova{
+    background:
+      radial-gradient(120% 80% at 80% 0%, rgba(74,107,87,.25), transparent 60%),
+      radial-gradient(80% 60% at 10% 100%, rgba(182,138,62,.12), transparent 60%),
+      var(--night);
+    color:#E8E3D6;
+    padding:clamp(64px,9vw,120px) 0;
+    border-top:1px solid #2a2f29;
+    border-bottom:1px solid #2a2f29;
+    position:relative; overflow:hidden;
+  }
+  .nova::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:.5;
+  }
+  .nova .section-head{ border-bottom-color:#2a2f29; }
+  .nova .section-head h2{ color:#E8E3D6; }
+  .nova .section-head h2 .num{ color:#9CB9A5; }
+  .nova .section-head .aside{ color:#8a8f86; }
+
+  .nova-grid{
+    display:grid; gap:clamp(28px,4vw,56px);
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  @media (min-width:980px){ .nova-grid{ grid-template-columns:1fr 1.1fr; } }
+
+  .nova-card{
+    background:linear-gradient(180deg, rgba(74,107,87,.10), rgba(74,107,87,.02));
+    border:1px solid #2a3a30;
+    border-radius:14px;
+    padding:clamp(20px,3vw,32px);
+    position:relative;
+  }
+  .nova-card::before{
+    content:''; position:absolute; inset:0; border-radius:14px; pointer-events:none;
+    box-shadow:0 0 60px rgba(156,185,165,.08) inset;
+  }
+  .nova-wordmark{
+    display:flex; align-items:center; gap:14px;
+    margin-bottom:18px;
+  }
+  .nova-mark{
+    width:44px; height:44px; border-radius:11px;
+    background:radial-gradient(circle at 30% 30%, #6FBF8F, #2E4A3A 70%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif',Georgia,serif; color:#0E1310;
+    font-size:24px; font-style:italic;
+  }
+  .nova-name{
+    font-family:'Instrument Serif',Georgia,serif; font-size:22px;
+    letter-spacing:.01em;
+  }
+  .nova-name b{ font-weight:400; color:#B68A3E; font-style:italic; }
+
+  .nova h3{
+    margin:0 0 16px 0;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(36px,5vw,60px); line-height:1; letter-spacing:-.01em;
+    color:#F0EBDD;
+  }
+  .nova h3 em{ font-style:italic; color:#B68A3E; }
+  .nova-lead{
+    font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+    font-size:clamp(20px,2.2vw,26px); line-height:1.35;
+    color:#C4C8BD; margin:0 0 24px 0; max-width:42ch;
+  }
+  .nova-body{ color:#A8AC9F; font-size:15px; line-height:1.65; max-width:46ch; margin:0 0 22px 0; }
+  .nova-tags{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px 0; }
+  .nova-tags .pill{ border-color:#3a4a3f; color:#B5BAA9; }
+  .nova-link{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:#E8E3D6; border-bottom:1px solid #6FBF8F; padding-bottom:4px;
+    transition:gap .2s, color .2s;
+  }
+  .nova-link:hover{ gap:14px; color:#9FE3B7; }
+
+  .nova-modules{
+    display:grid; gap:8px;
+    grid-template-columns:repeat(2, 1fr);
+    margin-top:16px;
+  }
+  @media (min-width:520px){ .nova-modules{ grid-template-columns:repeat(3, 1fr); } }
+  .module{
+    border:1px solid #2a3a30;
+    padding:12px 12px 14px;
+    border-radius:8px;
+    background:rgba(255,255,255,.02);
+  }
+  .module .mlabel{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#7BA38A; }
+  .module .mname{ font-family:'Instrument Serif',Georgia,serif; font-size:18px; color:#E8E3D6; margin-top:4px; }
+
+  /* =========================================================
+     Credentials
+     ========================================================= */
+  .creds{ display:grid; gap:48px; grid-template-columns:1fr; }
+  @media (min-width:880px){ .creds{ grid-template-columns:1fr 1fr; gap:80px; } }
+  .creds h3{
+    margin:0 0 22px 0;
+    font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+    font-size:clamp(26px,3.2vw,36px);
+    line-height:1.05;
+  }
+  .creds h3 .tag{
+    display:inline-block; vertical-align:middle; margin-left:10px;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--clay); border:1px solid var(--clay); padding:2px 8px; border-radius:999px;
+    font-style:normal;
+  }
+  .cred-note{ font-size:14px; color:var(--ink-3); margin-top:-12px; margin-bottom:18px; }
+  .cred-list{ list-style:none; padding:0; margin:0; }
+  .cred-list li{
+    padding:18px 0; border-bottom:1px solid var(--paper-3);
+    display:grid; gap:6px;
+  }
+  .cred-list li:last-child{ border-bottom:0; }
+  .cred-name{ font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; }
+  .cred-issuer{ font-size:13px; color:var(--ink-3); }
+  .cred-issuer .sep{ margin:0 8px; color:var(--paper-3); }
+
+  /* =========================================================
+     Skills & Career
+     ========================================================= */
+  .skills-grid{ display:grid; gap:40px; grid-template-columns:1fr; }
+  @media (min-width:900px){ .skills-grid{ grid-template-columns:1.2fr 1fr; gap:64px; } }
+  .skills-block h4{
+    margin:0 0 16px 0;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:500;
+  }
+  .skill-flow{
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(22px,2.6vw,30px);
+    line-height:1.35;
+    color:var(--ink); margin:0;
+  }
+  .skill-flow span{ color:var(--ink-3); }
+  .skill-flow em{ color:var(--clay-deep); font-style:italic; }
+  .tool-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:8px 16px;
+  }
+  @media (min-width:520px){ .tool-grid{ grid-template-columns:repeat(3,1fr); } }
+  .tool{
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    padding:10px 0; border-bottom:1px solid var(--paper-3);
+    color:var(--ink-2); display:flex; align-items:center; gap:10px;
+  }
+  .tool::before{ content:''; width:6px; height:6px; background:var(--clay); border-radius:50%; flex-shrink:0; }
+
+  .timeline{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+  .timeline li{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid var(--paper-3);
+    align-items:start;
+  }
+  .timeline .yr{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em;
+    color:var(--ink-3); padding-top:4px;
+  }
+  .timeline .role{ font-family:'Instrument Serif',Georgia,serif; font-size:22px; line-height:1.2; }
+  .timeline .at{ color:var(--ink-3); font-style:italic; }
+  .timeline .desc{ font-size:14px; color:var(--ink-3); margin-top:4px; }
+
+  /* =========================================================
+     Contact
+     ========================================================= */
+  .contact{
+    padding:clamp(80px,12vw,160px) 0;
+    border-top:1px solid var(--paper-3);
+  }
+  .contact h2{
+    margin:0;
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(56px,10vw,140px);
+    line-height:.92; letter-spacing:-.02em;
+  }
+  .contact h2 em{ font-style:italic; color:var(--clay); }
+  .contact-lead{
+    font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+    font-size:clamp(22px,2.6vw,32px); line-height:1.3; color:var(--ink-2);
+    margin:24px 0 40px; max-width:32ch;
+    text-wrap:pretty;
+  }
+  .contact-grid{
+    display:grid; gap:24px; grid-template-columns:1fr;
+  }
+  @media (min-width:680px){ .contact-grid{ grid-template-columns:repeat(2,1fr); gap:32px; } }
+  @media (min-width:1000px){ .contact-grid{ grid-template-columns:repeat(4,1fr); } }
+  .contact-card{
+    padding:24px 0;
+    border-top:1px solid var(--ink);
+  }
+  .contact-card .label{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); }
+  .contact-card .val{
+    display:block; margin-top:10px;
+    font-family:'Instrument Serif',Georgia,serif; font-size:clamp(18px,2vw,22px);
+    line-height:1.2; word-break:break-word;
+  }
+  .contact-card a.val{ transition:color .2s; }
+  .contact-card a.val:hover{ color:var(--clay); }
+
+  /* =========================================================
+     Footer
+     ========================================================= */
+  footer{
+    padding:32px 0 48px;
+    border-top:1px solid var(--paper-3);
+    background:var(--paper-2);
+  }
+  .foot-inner{
+    display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .foot-inner a{ border-bottom:1px solid transparent; transition:border-color .2s, color .2s; }
+  .foot-inner a:hover{ color:var(--ink); border-color:var(--clay); }
+
+  /* =========================================================
+     Scroll reveal + load animation
+     ========================================================= */
+  .fade{ opacity:0; transform:translateY(18px); transition:opacity .9s ease, transform .9s ease; }
+  .fade.in{ opacity:1; transform:none; }
+
+  .hero h1 .word,
+  .hero-sub .word,
+  .hero-meta,
+  .hero-side,
+  .hero-ticker{
+    opacity:0; transform:translateY(14px);
+    animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero h1 .word{ display:inline-block; }
+  .hero h1 .word:nth-child(1){ animation-delay:.10s; }
+  .hero h1 .word:nth-child(2){ animation-delay:.22s; }
+  .hero h1 .word:nth-child(3){ animation-delay:.34s; }
+  .hero-meta{ animation-delay:.05s; }
+  .hero-sub .word:nth-child(1){ animation-delay:.55s; }
+  .hero-sub .word:nth-child(2){ animation-delay:.62s; }
+  .hero-sub .word:nth-child(3){ animation-delay:.69s; }
+  .hero-sub .word:nth-child(4){ animation-delay:.76s; }
+  .hero-side{ animation-delay:.7s; }
+  .hero-ticker{ animation-delay:.85s; }
+
+  @keyframes rise{ to{ opacity:1; transform:none; } }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{ animation:none !important; transition:none !important; }
+    .fade{ opacity:1; transform:none; }
+  }
+
+  /* tiny screen tightening */
+  @media (max-width:520px){
+    .hero{ padding-top:80px; }
+    .corner-tag{ display:none; }
+    .timeline li{ grid-template-columns:70px 1fr; gap:14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="mark" href="#top">
+      <span class="mark-glyph">ef</span>
+      <span class="mark-name">Emanuel Figueroa</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="corner-tag mono">Auckland · Aotearoa NZ</div>
+
+    <div class="hero-meta">
+      <span><span class="dot"></span><span class="available">Available for contract — nationwide</span></span>
+      <span>Bilingual · English / Español</span>
+      <span>Est. portfolio · MMXXVI</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>
+          <span class="word">Emanuel</span>
+          <span class="word">Figueroa</span><span style="display:block; height:0;"></span>
+          <span class="word"><em>&amp; co.</em></span>
+        </h1>
+        <p class="hero-sub">
+          <span class="word">Operations </span>
+          <span class="word">&amp; process — </span>
+          <span class="word">who also builds </span>
+          <span class="word">dashboards and practical AI.</span>
+        </p>
+      </div>
+
+      <aside class="hero-side">
+        <div class="hero-card">
+          <h4>Positioning</h4>
+          <p>People-first systems. Plain English over jargon. Durable solutions over clever ones — built to outlast the person who built them.</p>
+        </div>
+        <div class="hero-card">
+          <h4>Currently</h4>
+          <p>Wrapping <a href="#nova">Mātauranga Nova</a> — a privacy-first AI companion for HIV &amp; sexual-health wellbeing in Aotearoa. <span style="color:var(--ink-3); font-size:12px; letter-spacing:.04em;">Confidential pilot.</span></p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="ticker-item"><span class="v">15+</span><span class="l">Yrs · Customer service</span></div>
+      <div class="ticker-item"><span class="v">3</span><span class="l">Published Tableau vizzes</span></div>
+      <div class="ticker-item"><span class="v">1</span><span class="l">Full-stack AI product — solo</span></div>
+      <div class="ticker-item"><span class="v">EN / ES</span><span class="l">Bilingual delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">01</span><span>About</span></h2>
+      <span class="aside">A short note</span>
+    </div>
+
+    <div class="about-grid about">
+      <div class="fade">
+        <p>
+          I&rsquo;m an operations and process professional based in Tāmaki Makaurau, working across hospitality, warehousing, events and small business.
+        </p>
+        <p class="muted">
+          Over the last few years I&rsquo;ve moved that same craft &mdash; finding the bottleneck, writing the runbook, getting people unstuck &mdash; into data visualisation and AI-assisted tooling. The work feels the same: notice the friction, build the durable thing, write it in plain English, hand it over.
+        </p>
+        <p class="muted">
+          I work fast, document as I go, and prefer boring infrastructure over impressive demos. Equally comfortable on a kitchen line, a SharePoint site, and a React build.
+        </p>
+      </div>
+
+      <aside class="about-side fade">
+        <h5>Based</h5>
+        <p>Auckland, New Zealand &middot; available nationwide for contract work, remote or on-site.</p>
+
+        <h5>Working language</h5>
+        <p>English &amp; Spanish (native bilingual). Comfortable translating between technical and non-technical audiences.</p>
+
+        <h5>Useful with</h5>
+        <div class="pill-row">
+          <span class="pill">Process design</span>
+          <span class="pill">Dashboards</span>
+          <span class="pill">AI tooling</span>
+          <span class="pill">Reporting</span>
+          <span class="pill">Project coordination</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<hr class="rule wrap" style="margin:0 auto; max-width:var(--max);" />
+
+<!-- ===================== SELECTED WORK ===================== -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">02</span><span>Selected work</span></h2>
+      <span class="aside">Four pieces · 2024 → 2026</span>
+    </div>
+    <p class="work-intro fade">
+      A flagship full-stack AI build, three published Tableau dashboards, and freelance commissions. Each links to the real, live artefact &mdash; nothing here is mocked.
+    </p>
+
+    <div class="work">
+
+      <!-- 01 — Sales Performance Overview -->
+      <article class="work-item">
+        <div class="work-vis fade" aria-hidden="true">
+          <div class="live-tag">LIVE · TABLEAU</div>
+          <!-- Tableau: King County housing — replica composition -->
+          <svg viewBox="0 0 640 440" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Manrope, system-ui, sans-serif">
+            <rect width="640" height="440" fill="#ffffff"/>
+            <!-- top header bar (Tableau viz title) -->
+            <g>
+              <text x="14" y="16" font-size="10" font-weight="700" fill="#2a2a2a">Sales Performance Overview</text>
+              <text x="168" y="16" font-size="9" fill="#5b5b5b">by Emanuel FIGUEROA</text>
+              <line x1="0" y1="22" x2="640" y2="22" stroke="#e6e6e6"/>
+            </g>
+
+            <!-- LEFT FILTERS PANEL -->
+            <g transform="translate(0,22)">
+              <rect x="0" y="0" width="150" height="418" fill="#fafafa" stroke="#e6e6e6"/>
+              <rect x="0" y="0" width="150" height="22" fill="#f0eada"/>
+              <text x="60" y="15" font-size="10" font-weight="700" fill="#2a2a2a">Filters</text>
+
+              <!-- Calendar header -->
+              <text x="8" y="38" font-size="8" font-weight="700" fill="#1f3b73">Select Month From Dropdown</text>
+              <text x="8" y="48" font-size="8" font-weight="700" fill="#1f3b73">And Day From Calendar</text>
+              <rect x="8" y="52" width="134" height="14" fill="#fff" stroke="#c8c8c8"/>
+              <text x="12" y="62" font-size="8" fill="#2a2a2a">November 2014</text>
+              <polygon points="134,58 140,58 137,62" fill="#666"/>
+
+              <!-- calendar days -->
+              <g transform="translate(8,72)" font-size="7" fill="#888">
+                <text x="2" y="6">Mon</text><text x="22" y="6">Tue</text><text x="42" y="6">Wed</text><text x="62" y="6">Thu</text><text x="82" y="6">Fri</text><text x="104" y="6">Sat</text><text x="124" y="6">Sun</text>
+                <line x1="0" y1="10" x2="134" y2="10" stroke="#e6e6e6"/>
+                <!-- date numbers -->
+                <g fill="#aaa">
+                  <text x="2" y="22">3</text><text x="22" y="22">4</text><text x="42" y="22">5</text><text x="62" y="22">6</text><text x="82" y="22">7</text><text x="104" y="22">8</text><text x="124" y="22">9</text>
+                  <text x="0" y="34">10</text><text x="20" y="34">11</text><text x="40" y="34">12</text><text x="60" y="34">13</text>
+                </g>
+                <!-- highlighted cell (14 selected) -->
+                <rect x="75" y="27" width="14" height="10" fill="#dbe3f5" stroke="#1f3b73"/>
+                <text x="80" y="35" fill="#1f3b73" font-weight="700">14</text>
+                <g fill="#aaa">
+                  <text x="102" y="34">15</text><text x="122" y="34">16</text>
+                  <text x="0" y="46">17</text><text x="20" y="46">18</text><text x="40" y="46">19</text><text x="60" y="46">20</text><text x="80" y="46">21</text><text x="100" y="46">22</text><text x="120" y="46">23</text>
+                  <text x="0" y="58">24</text><text x="20" y="58">25</text><text x="40" y="58">26</text><text x="82" y="58">29</text>
+                </g>
+              </g>
+
+              <!-- sliders -->
+              <g transform="translate(8,152)">
+                <text font-size="8" font-weight="700" fill="#1f3b73">Select Sqft Living</text>
+                <text y="12" font-size="8" fill="#444">1,220 - 2,731</text>
+                <line x1="0" y1="22" x2="134" y2="22" stroke="#c8c8c8"/>
+                <circle cx="10" cy="22" r="3" fill="#1f3b73"/>
+                <circle cx="120" cy="22" r="3" fill="#1f3b73"/>
+              </g>
+              <g transform="translate(8,192)">
+                <text font-size="8" font-weight="700" fill="#1f3b73">Select Yr Built</text>
+                <text y="12" font-size="8" fill="#444">1,929.00 - 1,990.80</text>
+                <line x1="0" y1="22" x2="134" y2="22" stroke="#c8c8c8"/>
+                <circle cx="20" cy="22" r="3" fill="#1f3b73"/>
+                <circle cx="105" cy="22" r="3" fill="#1f3b73"/>
+              </g>
+              <g transform="translate(8,232)">
+                <text font-size="8" font-weight="700" fill="#1f3b73">Select Sqft Lot</text>
+                <text y="12" font-size="8" fill="#444">1,036 - 47,111</text>
+                <line x1="0" y1="22" x2="134" y2="22" stroke="#c8c8c8"/>
+                <circle cx="6" cy="22" r="3" fill="#1f3b73"/>
+                <circle cx="126" cy="22" r="3" fill="#1f3b73"/>
+              </g>
+
+              <!-- View / No View heatmap -->
+              <g transform="translate(8,278)" font-size="7" fill="#444">
+                <text font-size="7" fill="#666">View</text>
+                <text x="36" y="-2" font-size="6" fill="#888">Average</text>
+                <text x="82" y="-2" font-size="6" fill="#888">Good</text>
+                <text x="112" y="-2" font-size="6" fill="#888">V.Good</text>
+                <text x="0" y="14">Avg</text>
+                <rect x="30" y="4" width="32" height="14" fill="#a8c7e4"/>
+                <rect x="64" y="4" width="32" height="14" fill="#5a8fc7"/>
+                <rect x="98" y="4" width="32" height="14" fill="#7da9d6"/>
+                <text x="0" y="32">No view</text>
+                <rect x="30" y="22" width="32" height="14" fill="#1f3b73"/>
+                <rect x="64" y="22" width="32" height="14" fill="#4377b6"/>
+                <rect x="98" y="22" width="32" height="14" fill="#86afd9"/>
+                <text x="32" y="14" fill="#fff" font-size="6">427,800</text>
+                <text x="66" y="14" fill="#fff" font-size="6">810,000</text>
+                <text x="32" y="32" fill="#fff" font-size="6">20,074,850</text>
+                <text x="66" y="32" fill="#fff" font-size="6">6,176,950</text>
+                <text x="100" y="32" fill="#fff" font-size="6">2,237,000</text>
+              </g>
+            </g>
+
+            <!-- MAIN AREA TITLE -->
+            <g transform="translate(156,30)">
+              <text font-size="10" font-weight="700" fill="#1f3b73">KING COUNTRY, WASHINGTON HOUSE  SELES DASHBOARD</text>
+            </g>
+
+            <!-- MAP PANEL -->
+            <g transform="translate(156,44)">
+              <rect x="0" y="0" width="312" height="170" fill="#eaf3ed" stroke="#e6e6e6"/>
+              <text x="4" y="10" font-size="9" font-weight="700" fill="#2a2a2a">Map</text>
+              <!-- water shapes -->
+              <path d="M0 18 L80 18 L96 50 L78 78 L92 118 L74 158 L100 170 L0 170 Z" fill="#cfe4ee"/>
+              <!-- land zones with diverging colors (KC) -->
+              <g stroke="#fff" stroke-width=".5">
+                <path d="M80 18 L160 18 L172 44 L156 64 L172 92 L160 116 L172 142 L162 170 L100 170 L74 158 L92 118 L78 78 L96 50 Z" fill="#cfe1f2"/>
+                <path d="M160 18 L210 18 L222 40 L210 64 L226 84 L218 110 L228 134 L218 158 L162 170 L172 142 L160 116 L172 92 L156 64 L172 44 Z" fill="#a8c7e4"/>
+                <path d="M210 18 L250 18 L260 36 L256 60 L266 84 L262 110 L274 132 L264 158 L218 158 L228 134 L218 110 L226 84 L210 64 L222 40 Z" fill="#7da9d6"/>
+                <path d="M250 18 L312 18 L312 60 L304 88 L312 112 L298 144 L312 170 L264 158 L274 132 L262 110 L266 84 L256 60 L260 36 Z" fill="#e8c9a6"/>
+                <path d="M260 60 L308 64 L312 96 L298 110 L284 100 L266 84 Z" fill="#d6804d"/>
+                <path d="M270 110 L312 112 L298 144 L282 138 L262 122 Z" fill="#c25a3a"/>
+              </g>
+              <!-- city labels -->
+              <g font-size="6" fill="#3a3a3a">
+                <text x="100" y="48">Edmonds</text>
+                <text x="96" y="66">Shoreline</text>
+                <text x="110" y="86">Bremerton</text>
+                <text x="150" y="80">Seattle</text>
+                <text x="180" y="100">Bellevue</text>
+                <text x="230" y="96">Sammamish</text>
+                <text x="170" y="130">Renton</text>
+                <text x="210" y="126">Maple Valley</text>
+                <text x="160" y="148">Tacoma</text>
+                <text x="240" y="152">Enumclaw</text>
+              </g>
+              <!-- map credit -->
+              <text x="4" y="166" font-size="5" fill="#666">© 2026 Mapbox  © OpenStreetMap</text>
+            </g>
+
+            <!-- DISTRIBUTION OF HOUSE PRICE -->
+            <g transform="translate(156,222)">
+              <text x="100" y="10" text-anchor="middle" font-size="10" font-weight="700" fill="#2a2a2a">Distribution of House Price</text>
+              <rect x="0" y="16" width="312" height="96" fill="#fff" stroke="#e6e6e6"/>
+              <g transform="translate(0,16)" fill="#1f3b73">
+                <rect class="grow-y" x="8"   y="34" width="32" height="58"/>
+                <rect class="grow-y" x="48"  y="20" width="32" height="72"/>
+                <rect class="grow-y" x="88"  y="50" width="32" height="42"/>
+                <rect class="grow-y" x="128" y="30" width="32" height="62"/>
+                <rect class="grow-y" x="168" y="54" width="32" height="38"/>
+                <rect class="grow-y" x="208" y="4"  width="32" height="88"/>
+                <rect class="grow-y" x="248" y="32" width="32" height="60"/>
+                <rect class="grow-y" x="288" y="56" width="20" height="36"/>
+              </g>
+              <g font-size="6" fill="#1f3b73" text-anchor="middle">
+                <text x="24"  y="42">$266,658</text>
+                <text x="64"  y="30">$300,366</text>
+                <text x="104" y="60">$337,950</text>
+                <text x="144" y="40">$364,790</text>
+                <text x="184" y="64">$425,000</text>
+                <text x="224" y="14">$443,161</text>
+                <text x="264" y="42">$489,333</text>
+              </g>
+            </g>
+
+            <!-- PRICE TREND LINE -->
+            <g transform="translate(474,44)">
+              <rect x="0" y="0" width="160" height="170" fill="#fff" stroke="#e6e6e6"/>
+              <text x="4" y="10" font-size="9" font-weight="700" fill="#2a2a2a">Avg Price · Trend</text>
+              <g font-size="5" fill="#999">
+                <text x="2" y="30">825k</text><text x="2" y="60">600k</text><text x="2" y="90">450k</text><text x="2" y="120">350k</text>
+              </g>
+              <polyline class="draw" style="--len:340;" fill="none" stroke="#4a6fbf" stroke-width="1.4"
+                points="22,32 36,72 52,68 68,80 84,72 100,46 116,108 132,76 148,82"/>
+              <g fill="#1f3b73">
+                <circle cx="22" cy="32" r="1.8"/><circle cx="36" cy="72" r="1.8"/><circle cx="52" cy="68" r="1.8"/><circle cx="68" cy="80" r="1.8"/><circle cx="84" cy="72" r="1.8"/><circle cx="100" cy="46" r="1.8"/><circle cx="116" cy="108" r="1.8"/><circle cx="132" cy="76" r="1.8"/><circle cx="148" cy="82" r="1.8"/>
+              </g>
+              <g font-size="5" fill="#1f3b73">
+                <text x="20" y="26">825,000</text>
+                <text x="94" y="40">771,250</text>
+                <text x="108" y="118">329,129</text>
+              </g>
+            </g>
+
+            <!-- right column under trend: line summary -->
+            <g transform="translate(474,222)">
+              <rect x="0" y="16" width="160" height="96" fill="#fff" stroke="#e6e6e6"/>
+              <text x="80" y="10" text-anchor="middle" font-size="10" font-weight="700" fill="#2a2a2a">Price by Bedrooms</text>
+              <polyline class="draw" style="--len:320;" fill="none" stroke="#1f3b73" stroke-width="1.4"
+                points="10,88 30,72 50,58 70,46 90,34 110,30 130,42 150,58"/>
+              <g fill="#1f3b73">
+                <circle cx="10" cy="88" r="1.6"/><circle cx="30" cy="72" r="1.6"/><circle cx="50" cy="58" r="1.6"/><circle cx="70" cy="46" r="1.6"/><circle cx="90" cy="34" r="1.6"/><circle cx="110" cy="30" r="1.6"/><circle cx="130" cy="42" r="1.6"/><circle cx="150" cy="58" r="1.6"/>
+              </g>
+            </g>
+
+            <!-- footer bar -->
+            <g>
+              <line x1="0" y1="422" x2="640" y2="422" stroke="#e6e6e6"/>
+              <text x="6" y="434" font-size="7" fill="#8a8a8a">⌘ View on Tableau Public</text>
+              <text x="600" y="434" font-size="7" fill="#8a8a8a" text-anchor="end">Share ⊕</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="fade">
+          <div class="work-num">01 — Data Visualisation</div>
+          <h3 class="work-title">Sales Performance <em>Overview</em></h3>
+          <div class="work-kicker">Tableau Public · King County, Washington</div>
+          <p class="work-body">
+            Interactive housing-sales dashboard built on King County, WA data. Calendar-driven filtering, a price-by-zone map (Mapbox), distribution histograms, and a price-trend line &mdash; designed so a non-analyst can answer a real question in under thirty seconds.
+          </p>
+          <div class="work-meta">
+            <span class="pill">Tableau</span>
+            <span class="pill">Mapbox</span>
+            <span class="pill">KPI design</span>
+            <span class="pill">Calendar filters</span>
+          </div>
+          <a class="work-link" href="https://public.tableau.com/app/profile/emanuel.figueroa" target="_blank" rel="noopener">
+            View on Tableau Public <span class="arrow">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- 02 — Airways Reviews -->
+      <article class="work-item reverse">
+        <div class="work-vis fade" aria-hidden="true">
+          <div class="live-tag">LIVE · TABLEAU</div>
+          <svg viewBox="0 0 640 440" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Manrope, system-ui, sans-serif">
+            <rect width="640" height="440" fill="#ffffff"/>
+            <!-- title bar -->
+            <text x="14" y="16" font-size="10" font-weight="700" fill="#2a2a2a">Airways Reviews</text>
+            <text x="112" y="16" font-size="9" fill="#5b5b5b">by Emanuel FIGUEROA</text>
+            <line x1="0" y1="22" x2="640" y2="22" stroke="#e6e6e6"/>
+
+            <!-- DARK navy left rail title -->
+            <g transform="translate(0,22)">
+              <rect x="0" y="0" width="96" height="94" fill="#13135a"/>
+              <text x="48" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#d6342c">Airways</text>
+              <text x="48" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#d6342c">Reviews</text>
+            </g>
+
+            <!-- KPI STRIP -->
+            <g transform="translate(96,22)">
+              <rect x="0" y="0" width="544" height="94" fill="#13135a"/>
+              <g font-family="Manrope" fill="#ffffff">
+                <g transform="translate(0,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">1.4</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Entertainment</text>
+                </g>
+                <g transform="translate(90,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">3.3</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Cabin Staff Service</text>
+                </g>
+                <g transform="translate(180,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">2.4</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Food Beverages</text>
+                </g>
+                <g transform="translate(270,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">3.0</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Ground Service</text>
+                </g>
+                <g transform="translate(360,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">2.8</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Value For Money</text>
+                </g>
+                <g transform="translate(450,0)">
+                  <text x="45" y="36" text-anchor="middle" font-size="22" font-weight="700">2.9</text>
+                  <text x="45" y="58" text-anchor="middle" font-size="7.5" fill="#c9c8e6">Avg. Seat Comfort</text>
+                </g>
+              </g>
+              <text x="272" y="82" text-anchor="middle" font-size="8" fill="#7c7dbf">Average Cabin Crew Staff Service By Month</text>
+            </g>
+
+            <!-- LEFT FILTERS PANEL -->
+            <g transform="translate(0,116)">
+              <rect x="0" y="0" width="96" height="300" fill="#fafafa" stroke="#e6e6e6"/>
+              <text x="6" y="14" font-size="8" font-weight="700" fill="#2a2a2a">Pick a matric</text>
+              <g font-size="7" fill="#444">
+                <text x="16" y="28">Overal Ranting</text>
+                <text x="16" y="40">Cabin Crew Service</text>
+                <text x="16" y="52">Entertenment</text>
+                <text x="16" y="64" font-weight="700">Food</text>
+                <text x="6" y="64" fill="#d6342c" font-weight="700">✓</text>
+                <text x="16" y="76">Ground Service</text>
+                <text x="16" y="88">Seat Confort</text>
+                <text x="16" y="100">Value</text>
+              </g>
+              <line x1="6" y1="108" x2="90" y2="108" stroke="#e6e6e6"/>
+              <text x="6" y="122" font-size="8" font-weight="700" fill="#2a2a2a">Aircraft (group)</text>
+              <g font-size="7" fill="#444">
+                <text x="6" y="136" fill="#1f1f6e">✓</text><text x="16" y="136">(All)</text>
+                <text x="6" y="148" fill="#1f1f6e">✓</text><text x="16" y="148">A319</text>
+                <text x="6" y="160" fill="#1f1f6e">✓</text><text x="16" y="160">A320</text>
+                <text x="6" y="172" fill="#1f1f6e">✓</text><text x="16" y="172">A321</text>
+                <text x="6" y="184" fill="#1f1f6e">✓</text><text x="16" y="184">A380</text>
+                <text x="6" y="196" fill="#1f1f6e">✓</text><text x="16" y="196">Boeing 747</text>
+                <text x="6" y="208" fill="#1f1f6e">✓</text><text x="16" y="208">Boeing 747-400</text>
+                <text x="6" y="220" fill="#1f1f6e">✓</text><text x="16" y="220">Boeing 777</text>
+                <text x="6" y="232" fill="#1f1f6e">✓</text><text x="16" y="232">Boeing 777-200</text>
+                <text x="6" y="244" fill="#1f1f6e">✓</text><text x="16" y="244">Boeing 787</text>
+                <text x="6" y="256" fill="#1f1f6e">✓</text><text x="16" y="256">Boeing 787-9</text>
+              </g>
+              <text x="6" y="272" font-size="8" font-weight="700" fill="#2a2a2a">Rating</text>
+              <text x="6" y="284" font-size="7" fill="#666">1 - 3,595</text>
+              <line x1="6" y1="292" x2="90" y2="292" stroke="#c8c8c8"/>
+              <circle cx="10" cy="292" r="2" fill="#1f1f6e"/>
+              <circle cx="86" cy="292" r="2" fill="#1f1f6e"/>
+            </g>
+
+            <!-- MAIN: red trend line -->
+            <g transform="translate(100,124)">
+              <rect x="0" y="0" width="304" height="160" fill="#fff" stroke="#e6e6e6"/>
+              <!-- y axis -->
+              <g font-size="6" fill="#999">
+                <text x="4" y="20">5</text><text x="4" y="54">4</text><text x="4" y="88">3</text><text x="4" y="122">2</text><text x="4" y="152">1</text>
+              </g>
+              <!-- red zigzag trend -->
+              <polyline class="draw" style="--len:1400;" fill="none" stroke="#d6342c" stroke-width="1.2"
+                points="14,86 24,90 34,76 44,92 54,72 64,96 74,82 84,100 94,88 104,118 114,72 124,148 134,40 144,86 154,68 164,98 174,80 184,108 194,76 204,96 214,82 224,100 234,86 244,116 254,72 264,92 274,78 284,108 294,90"/>
+              <!-- annotations -->
+              <text x="66" y="66" font-size="6" fill="#d6342c" font-weight="700">April 2020</text>
+              <text x="66" y="73" font-size="6" fill="#d6342c">3.250</text>
+              <text x="144" y="34" font-size="6" fill="#d6342c" font-weight="700">May 2021</text>
+              <text x="144" y="41" font-size="6" fill="#d6342c">4.000</text>
+              <text x="32" y="126" font-size="6" fill="#d6342c" font-weight="700">March 2018</text>
+              <text x="32" y="133" font-size="6" fill="#d6342c">Crew 2.083</text>
+              <text x="112" y="144" font-size="6" fill="#d6342c" font-weight="700">Apr 2020</text>
+              <text x="112" y="151" font-size="6" fill="#d6342c">COVID 19</text>
+            </g>
+
+            <!-- WORLD MAP (right) -->
+            <g transform="translate(412,124)">
+              <rect x="0" y="0" width="222" height="160" fill="#fff" stroke="#e6e6e6"/>
+              <!-- continents -->
+              <g fill="#cfe1d3" stroke="#a8c7b4" stroke-width=".5">
+                <!-- North America -->
+                <path d="M14 28 Q30 18 50 22 Q72 26 86 38 Q90 56 82 70 Q70 78 58 70 Q46 76 36 68 Q22 62 18 50 Q12 38 14 28 Z" fill="#b8d8c5"/>
+                <!-- South America - highlighted -->
+                <path d="M62 78 Q72 76 78 84 Q84 96 80 110 Q76 124 70 130 Q60 130 56 118 Q52 100 58 86 Q60 80 62 78 Z" fill="#2f7a52"/>
+                <!-- Europe -->
+                <path d="M110 32 Q124 28 136 32 Q140 42 132 50 Q120 54 110 48 Q104 40 110 32 Z" fill="#b8d8c5"/>
+                <!-- Africa - mid -->
+                <path d="M118 56 Q132 54 140 66 Q146 82 138 96 Q128 106 118 100 Q108 90 110 76 Q112 62 118 56 Z" fill="#7eb697"/>
+                <!-- Asia -->
+                <path d="M140 32 Q170 26 190 38 Q204 48 200 64 Q188 76 170 72 Q150 68 142 56 Q138 44 140 32 Z" fill="#cfe1d3"/>
+                <!-- Australia -->
+                <path d="M178 110 Q196 106 204 116 Q206 128 196 132 Q182 132 176 124 Q172 116 178 110 Z" fill="#b8d8c5"/>
+              </g>
+              <text x="4" y="154" font-size="5" fill="#888">© 2026 Mapbox  © OpenStreetMap</text>
+              <!-- map controls -->
+              <g transform="translate(196,8)" fill="#fff" stroke="#ccc">
+                <rect width="16" height="16"/><text x="8" y="12" font-size="9" fill="#666" text-anchor="middle" stroke="none">⌕</text>
+              </g>
+            </g>
+
+            <!-- BOTTOM: Avg Food By Aircraft -->
+            <g transform="translate(100,292)">
+              <rect x="0" y="0" width="304" height="124" fill="#fff" stroke="#e6e6e6"/>
+              <text x="152" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#2a2a2a">Average Food By Aircraft</text>
+              <g font-size="7" fill="#333">
+                <text x="4" y="30">A321</text><rect class="grow-x" x="30" y="22" width="50" height="8" fill="#c6cce8"/><text x="84" y="30" fill="#666">1.635</text>
+                <text x="4" y="44">A319</text><rect class="grow-x" x="30" y="36" width="54" height="8" fill="#c6cce8"/><text x="88" y="44" fill="#666">1.696</text>
+                <text x="4" y="58">A320</text><rect class="grow-x" x="30" y="50" width="60" height="8" fill="#c6cce8"/><text x="94" y="58" fill="#666">1.795</text>
+                <text x="4" y="72" font-weight="700" fill="#b88a1a">Boeing 747</text>
+                <rect class="grow-x" x="30" y="64" width="80" height="8" fill="#f0c64a"/>
+                <rect class="grow-x" x="30" y="64" width="80" height="8" fill="#13135a" opacity=".88"/>
+                <text x="114" y="72" fill="#13135a" font-weight="700">2.343</text>
+                <text x="4" y="86">Boeing 777</text><rect class="grow-x" x="30" y="78" width="84" height="8" fill="#c6cce8"/><text x="118" y="86" fill="#666">2.441</text>
+                <text x="4" y="100">Various</text><rect class="grow-x" x="30" y="92" width="94" height="8" fill="#c6cce8"/><text x="128" y="100" fill="#666">2.599</text>
+              </g>
+              <g font-size="6" fill="#999">
+                <text x="30" y="118">1.65</text><text x="70" y="118">2.00</text><text x="110" y="118">2.50</text><text x="150" y="118">3.00</text>
+              </g>
+            </g>
+
+            <!-- BOTTOM right: rating dist counts -->
+            <g transform="translate(412,292)">
+              <rect x="0" y="0" width="222" height="124" fill="#fff" stroke="#e6e6e6"/>
+              <text x="112" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#2a2a2a">Reviews Count by Aircraft</text>
+              <g font-size="7" fill="#13135a">
+                <text x="4" y="30">A321</text>
+                <rect x="40" y="22" width="22" height="8" fill="#f0a8a3"/>
+                <text x="180" y="30" fill="#666">63</text>
+                <text x="4" y="44">A319</text>
+                <rect x="40" y="36" width="26" height="8" fill="#f0a8a3"/>
+                <text x="180" y="44" fill="#666">69</text>
+                <text x="4" y="58">A320</text>
+                <rect x="40" y="50" width="120" height="8" fill="#d6342c" opacity=".4"/>
+                <text x="180" y="58" fill="#666">263</text>
+                <text x="4" y="72" font-weight="700">B747</text>
+                <rect x="40" y="64" width="24" height="8" fill="#d6342c"/>
+                <text x="180" y="72" fill="#d6342c" font-weight="700">67</text>
+                <text x="4" y="86">B777</text>
+                <rect x="40" y="78" width="78" height="8" fill="#f0a8a3"/>
+                <text x="180" y="86" fill="#666">177</text>
+                <text x="4" y="100">Various</text>
+                <rect x="40" y="92" width="134" height="8" fill="#d6342c" opacity=".55"/>
+                <text x="180" y="100" fill="#666">292</text>
+              </g>
+            </g>
+
+            <!-- footer -->
+            <line x1="0" y1="422" x2="640" y2="422" stroke="#e6e6e6"/>
+            <text x="6" y="434" font-size="7" fill="#8a8a8a">⌘ View on Tableau Public</text>
+            <text x="600" y="434" font-size="7" fill="#8a8a8a" text-anchor="end">Share ⊕</text>
+          </svg>
+        </div>
+
+        <div class="fade">
+          <div class="work-num">02 — Data Visualisation</div>
+          <h3 class="work-title">Airways <em>Reviews</em></h3>
+          <div class="work-kicker">Tableau Public · Airline customer experience</div>
+          <p class="work-body">
+            Customer-experience analytics for an airline: cabin-service trends over time, ratings broken down by aircraft type, and a world map of review origins. The COVID-19 drop is unmissable &mdash; that&rsquo;s the point of the layout.
+          </p>
+          <div class="work-meta">
+            <span class="pill">Tableau</span>
+            <span class="pill">Time series</span>
+            <span class="pill">Geo analysis</span>
+            <span class="pill">UX of metrics</span>
+          </div>
+          <a class="work-link" href="https://public.tableau.com/app/profile/emanuel.figueroa" target="_blank" rel="noopener">
+            View on Tableau Public <span class="arrow">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- 03 — Sales & Profit USA -->
+      <article class="work-item">
+        <div class="work-vis fade" aria-hidden="true">
+          <div class="live-tag">LIVE · TABLEAU</div>
+          <svg viewBox="0 0 640 440" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Manrope, system-ui, sans-serif">
+            <rect width="640" height="440" fill="#ffffff"/>
+            <!-- title bar -->
+            <text x="14" y="16" font-size="10" font-weight="700" fill="#2a2a2a">Sales and Profit Analysis by Segment and Category USA</text>
+            <text x="316" y="16" font-size="9" fill="#5b5b5b">by Emanuel FIGUEROA</text>
+            <line x1="0" y1="22" x2="640" y2="22" stroke="#e6e6e6"/>
+
+            <!-- KPI block -->
+            <g transform="translate(8,30)">
+              <text font-size="9" font-weight="700" fill="#2a2a2a">Key Performance indicators</text>
+              <!-- Profit ratio legend bar -->
+              <g transform="translate(260,-4)">
+                <text x="54" y="8" font-size="8" fill="#2a2a2a" text-anchor="middle">Profit ratio</text>
+                <defs>
+                  <linearGradient id="prgrad" x1="0" x2="1">
+                    <stop offset="0" stop-color="#c25a3a"/>
+                    <stop offset=".5" stop-color="#f0e0d0"/>
+                    <stop offset="1" stop-color="#1f3b73"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="10" width="110" height="6" fill="url(#prgrad)"/>
+                <text x="-2" y="22" font-size="7" fill="#666" text-anchor="end">−0.2169</text>
+                <text x="112" y="22" font-size="7" fill="#666">0.3698</text>
+              </g>
+              <g transform="translate(440,-4)">
+                <text x="40" y="8" font-size="8" fill="#2a2a2a" text-anchor="middle">Profit per Order</text>
+                <rect x="0" y="10" width="82" height="6" fill="#dce3f0"/>
+                <rect x="22" y="10" width="32" height="6" fill="#1f3b73"/>
+                <text x="0" y="22" font-size="7" fill="#666">50.80 - 67.30</text>
+              </g>
+            </g>
+
+            <!-- Geography label -->
+            <text x="8" y="54" font-size="9" font-weight="700" fill="#2a2a2a">Geografy</text>
+
+            <!-- USA CHOROPLETH MAP -->
+            <g transform="translate(8,60)">
+              <rect x="0" y="0" width="464" height="178" fill="#f4f4f4" stroke="#e6e6e6"/>
+              <!-- continental US silhouette built from state-shaped polygons (stylised) -->
+              <g stroke="#fff" stroke-width=".7" font-size="7" fill="#fff">
+                <!-- top row (WA OR ID MT ND MN WI MI NY ME) -->
+                <polygon points="24,18 70,18 70,46 24,46" fill="#7da9d6"/><text x="38" y="36" fill="#fff">0.2409</text>
+                <polygon points="70,18 110,18 110,46 70,46" fill="#5a8fc7"/><text x="82" y="36" fill="#fff">0.3280</text>
+                <polygon points="110,18 150,18 150,46 110,46" fill="#86afd9"/><text x="122" y="36" fill="#fff">0.2502</text>
+                <polygon points="150,18 190,18 190,46 150,46" fill="#4377b6"/><text x="162" y="36" fill="#fff">0.3001</text>
+                <polygon points="190,18 224,18 224,46 190,46" fill="#86afd9"/><text x="198" y="36" fill="#fff">0.2616</text>
+                <polygon points="224,18 256,18 256,46 224,46" fill="#7da9d6"/><text x="232" y="36" fill="#fff">0.2585</text>
+                <polygon points="256,18 290,18 290,46 256,46" fill="#4377b6"/><text x="264" y="36" fill="#fff">0.3577</text>
+                <polygon points="290,18 326,18 326,46 290,46" fill="#5a8fc7"/><text x="298" y="36" fill="#fff">0.2340</text>
+                <polygon points="326,18 360,18 360,46 326,46" fill="#86afd9"/><text x="334" y="36" fill="#fff">0.3220</text>
+
+                <!-- mid row -->
+                <polygon points="24,46 60,46 60,78 24,78" fill="#d49a72"/><text x="30" y="66" fill="#fff">−0.0683</text>
+                <polygon points="60,46 100,46 100,78 60,78" fill="#7da9d6"/><text x="68" y="66" fill="#fff">0.1983</text>
+                <polygon points="100,46 140,46 140,78 100,78" fill="#86afd9"/><text x="110" y="66" fill="#fff">0.0625</text>
+                <polygon points="140,46 180,46 180,78 140,78" fill="#7da9d6"/><text x="148" y="66" fill="#fff">0.2729</text>
+                <polygon points="180,46 220,46 220,78 180,78" fill="#5a8fc7"/><text x="188" y="66" fill="#fff">0.2870</text>
+                <polygon points="220,46 254,46 254,78 220,78" fill="#d49a72"/><text x="226" y="66" fill="#fff">−0.1573</text>
+                <polygon points="254,46 290,46 290,78 254,78" fill="#d49a72"/><text x="260" y="66" fill="#fff">−0.1335</text>
+                <polygon points="290,46 326,46 326,78 290,78" fill="#1f3b73"/><text x="296" y="66" fill="#fff">0.3061</text>
+                <polygon points="326,46 360,46 360,78 326,78" fill="#7da9d6"/><text x="332" y="66" fill="#fff">0.2633</text>
+
+                <!-- bottom row + south -->
+                <polygon points="40,78 78,78 78,110 40,110" fill="#c25a3a"/><text x="46" y="98" fill="#fff">−0.2033</text>
+                <polygon points="78,78 118,78 118,110 78,110" fill="#d49a72"/><text x="86" y="98" fill="#fff">−0.0972</text>
+                <polygon points="118,78 160,78 160,110 118,110" fill="#86afd9"/><text x="126" y="98" fill="#fff">0.2466</text>
+                <polygon points="160,78 210,78 210,110 160,110" fill="#c25a3a"/><text x="170" y="98" fill="#fff">−0.1512</text>
+                <polygon points="210,78 256,78 256,110 210,110" fill="#7da9d6"/><text x="218" y="98" fill="#fff">0.2966</text>
+                <polygon points="256,78 296,78 296,110 256,110" fill="#d49a72"/><text x="262" y="98" fill="#fff">−0.1347</text>
+                <polygon points="296,78 336,78 336,110 296,110" fill="#7da9d6"/><text x="304" y="98" fill="#fff">0.1573</text>
+
+                <!-- Florida -->
+                <polygon points="258,110 322,110 322,138 280,138" fill="#d49a72"/><text x="272" y="126" fill="#fff">−0.0380</text>
+              </g>
+              <!-- Mexico label -->
+              <text x="170" y="160" font-size="8" fill="#888">Mexico</text>
+              <!-- legend -->
+              <g transform="translate(364,18)" font-size="7" fill="#2a2a2a">
+                <text x="0" y="4" font-weight="700">Orden Profitable</text>
+                <rect x="0" y="10" width="10" height="10" fill="#1f3b73"/><text x="14" y="18">Profitable</text>
+                <rect x="0" y="24" width="10" height="10" fill="#c25a3a"/><text x="14" y="32">Unprofitable</text>
+              </g>
+              <text x="4" y="172" font-size="5" fill="#888">© 2026 Mapbox  © OpenStreetMap</text>
+            </g>
+
+            <!-- RIGHT side: Profit ratio by city -->
+            <g transform="translate(480,60)">
+              <text font-size="9" font-weight="700" fill="#2a2a2a">Profit ratio by city</text>
+              <g transform="translate(0,12)">
+                <text font-size="7" fill="#888">City ▼</text>
+              </g>
+              <g transform="translate(0,22)" font-size="7" fill="#2a2a2a">
+                <text x="0" y="14">Abilene</text><rect class="grow-x" x="40" y="6" width="110" height="8" fill="#c25a3a"/><text x="42" y="14" fill="#fff" font-weight="700">−2.700</text>
+                <text x="0" y="30">Mesquite</text><rect class="grow-x" x="40" y="22" width="82" height="8" fill="#d6804d"/><text x="42" y="30" fill="#fff" font-weight="700">−1.680</text>
+                <text x="0" y="46">Oswego</text><rect class="grow-x" x="40" y="38" width="80" height="8" fill="#d6804d"/><text x="42" y="46" fill="#fff" font-weight="700">−1.665</text>
+                <text x="0" y="62">Romeoville</text><rect class="grow-x" x="40" y="54" width="78" height="8" fill="#d6804d"/><text x="42" y="62" fill="#fff" font-weight="700">−1.650</text>
+              </g>
+              <g transform="translate(0,98)" font-size="6" fill="#888">
+                <text x="0" y="0">−3.0</text><text x="40" y="0">−2.0</text><text x="80" y="0">−1.0</text><text x="120" y="0">0.0</text>
+              </g>
+              <text x="60" y="112" font-size="6" fill="#666" text-anchor="middle">Profit ratio</text>
+            </g>
+
+            <!-- BOTTOM LEFT: Sale by category -->
+            <g transform="translate(8,250)">
+              <text font-size="9" font-weight="700" fill="#2a2a2a">Sale by category</text>
+              <rect x="0" y="12" width="316" height="164" fill="#fff" stroke="#e6e6e6"/>
+              <g font-size="7" fill="#2a2a2a">
+                <text x="4" y="22">Category</text>
+                <text x="4" y="42">Furniture</text>
+                <text x="4" y="92">Office</text>
+                <text x="4" y="100">Supplies</text>
+                <text x="4" y="150">Technology</text>
+              </g>
+              <!-- furniture area -->
+              <g transform="translate(50,28)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$20K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 38 Q20 24 40 30 T80 28 T120 22 T160 26 T200 18 T240 30 L240 42 L0 42 Z" fill="#1f3b73" opacity=".75"/>
+                <path d="M0 38 Q20 32 40 30 T80 34 T120 30 T160 32 T200 36 T240 32 L240 42 L0 42 Z" fill="#d49a72"/>
+              </g>
+              <g transform="translate(50,80)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$20K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 36 Q20 22 40 28 T80 24 T120 30 T160 18 T200 22 T240 16 L240 42 L0 42 Z" fill="#1f3b73" opacity=".75"/>
+                <path d="M0 36 Q20 30 40 32 T80 28 T120 34 T160 26 T200 30 T240 24 L240 42 L0 42 Z" fill="#d49a72"/>
+              </g>
+              <g transform="translate(50,132)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$20K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 38 Q20 24 40 18 T80 26 T120 8 T160 26 T200 18 T240 22 L240 42 L0 42 Z" fill="#1f3b73" opacity=".75"/>
+                <path d="M0 38 Q20 32 40 28 T80 32 T120 20 T160 32 T200 30 T240 32 L240 42 L0 42 Z" fill="#d49a72"/>
+              </g>
+              <g font-size="6" fill="#888">
+                <text x="50" y="178">0</text><text x="90" y="178">2</text><text x="130" y="178">4</text><text x="170" y="178">6</text><text x="210" y="178">8</text><text x="250" y="178">10</text><text x="290" y="178">12</text>
+              </g>
+              <text x="158" y="188" font-size="7" fill="#666" text-anchor="middle">Month of Order Date</text>
+            </g>
+
+            <!-- BOTTOM RIGHT: Sales by segment -->
+            <g transform="translate(330,250)">
+              <text font-size="9" font-weight="700" fill="#2a2a2a">Sales by segment</text>
+              <rect x="0" y="12" width="302" height="164" fill="#fff" stroke="#e6e6e6"/>
+              <g font-size="7" fill="#2a2a2a">
+                <text x="4" y="22">Segment</text>
+                <text x="4" y="42">Consumer</text>
+                <text x="4" y="92">Corporate</text>
+                <text x="4" y="150">Home Office</text>
+              </g>
+              <g transform="translate(60,28)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$10K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 38 Q20 22 40 26 T80 18 T120 24 T160 14 T200 22 T230 16 L230 42 L0 42 Z" fill="#1f3b73" opacity=".75"/>
+                <path d="M0 38 Q20 30 40 32 T80 26 T120 30 T160 28 T200 32 T230 26 L230 42 L0 42 Z" fill="#d49a72"/>
+              </g>
+              <g transform="translate(60,80)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$10K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 36 Q20 28 40 30 T80 22 T120 28 T160 18 T200 26 T230 22 L230 42 L0 42 Z" fill="#1f3b73" opacity=".75"/>
+                <path d="M0 36 Q20 32 40 30 T80 32 T120 30 T160 28 T200 32 T230 28 L230 42 L0 42 Z" fill="#d49a72"/>
+              </g>
+              <g transform="translate(60,132)">
+                <text x="-4" y="4" font-size="6" fill="#888">Sales</text>
+                <text x="-4" y="30" font-size="6" fill="#888">$10K</text>
+                <text x="-4" y="42" font-size="6" fill="#888">$0</text>
+                <path d="M0 38 Q20 32 40 34 T80 30 T120 32 T160 28 T200 30 T230 26 L230 42 L0 42 Z" fill="#1f3b73" opacity=".7"/>
+                <path d="M0 38 Q20 36 40 36 T80 34 T120 34 T160 32 T200 34 T230 32 L230 42 L0 42 Z" fill="#d49a72" opacity=".9"/>
+              </g>
+              <g font-size="6" fill="#888">
+                <text x="60" y="178">0</text><text x="100" y="178">2</text><text x="140" y="178">4</text><text x="180" y="178">6</text><text x="220" y="178">8</text><text x="260" y="178">10</text>
+              </g>
+              <text x="160" y="188" font-size="7" fill="#666" text-anchor="middle">Month of Order Date</text>
+            </g>
+
+            <!-- footer -->
+            <line x1="0" y1="422" x2="640" y2="422" stroke="#e6e6e6"/>
+            <text x="6" y="434" font-size="7" fill="#8a8a8a">⌘ View on Tableau Public</text>
+            <text x="600" y="434" font-size="7" fill="#8a8a8a" text-anchor="end">Share ⊕</text>
+          </svg>
+        </div>
+
+        <div class="fade">
+          <div class="work-num">03 — Data Visualisation</div>
+          <h3 class="work-title">Sales &amp; Profit, <em>by Segment</em></h3>
+          <div class="work-kicker">Tableau Public · USA</div>
+          <p class="work-body">
+            A profit-ratio choropleth of US states, sales-by-category area charts cross-cut by customer segment, and a profit-by-city ranking. Designed for a finance lead to find the unprofitable corners of the business in one glance.
+          </p>
+          <div class="work-meta">
+            <span class="pill">Tableau</span>
+            <span class="pill">Choropleth</span>
+            <span class="pill">Segment analysis</span>
+            <span class="pill">Decision support</span>
+          </div>
+          <a class="work-link" href="https://public.tableau.com/app/profile/emanuel.figueroa" target="_blank" rel="noopener">
+            View on Tableau Public <span class="arrow">↗</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOVA FEATURE ===================== -->
+<section id="nova" class="nova">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">04 / Flagship</span><span>Mātauranga Nova</span></h2>
+      <span class="aside">Solo build · 2026</span>
+    </div>
+
+    <div class="nova-grid">
+      <div class="fade">
+        <div class="nova-wordmark">
+          <div class="nova-mark">N</div>
+          <div class="nova-name">Mātauranga <b>Nova</b></div>
+        </div>
+        <h3>A <em>private companion</em><br/>for sexual-health wellbeing.</h3>
+        <p class="nova-lead">An AI chat companion paired with an operator analytics dashboard &mdash; science-led, culturally safe, sovereign NZ AI. Listens without judgment, informs without fear, and never stores users&rsquo; words.</p>
+        <p class="nova-body">
+          A privacy-first AI chat platform for HIV &amp; sexual-health communities in Aotearoa, built solo end-to-end as a <strong style="color:#D6CFB9; font-weight:600;">confidential pilot for a national NGO partner</strong>. Full-stack React &amp; Node, local LLM, conversational interface with crisis pathways, live data from public Health NZ reports, zero-data-retention architecture aligned with the NZ Privacy Act 2020, IPP 3A, HIPC 2020 and Te Mana Raraunga.
+        </p>
+        <div class="nova-tags">
+          <span class="pill">AI chat</span><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">Local LLM</span><span class="pill">Zero retention</span><span class="pill">NZ Privacy Act 2020</span><span class="pill">Te Mana Raraunga</span>
+        </div>
+        <div class="work-links">
+          <a class="nova-link" href="#contact">Request a private walkthrough <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="nova-chat fade" aria-hidden="true">
+        <!-- animated constellation backdrop -->
+        <div class="stars"><canvas id="novaStars"></canvas></div>
+
+        <!-- top bar -->
+        <div class="chat-top">
+          <div class="chat-brand">
+            <div class="chat-brand-mark">N</div>
+            <div>
+              <div class="chat-brand-name">Mātauranga <i>NOVA</i></div>
+              <div class="chat-brand-sub">Private · Zero data retention</div>
+            </div>
+          </div>
+          <div class="chat-actions">
+            <span class="chat-btn">EN ▾</span>
+            <span class="chat-btn solid">Dashboard</span>
+            <span class="chat-btn">New chat</span>
+          </div>
+        </div>
+
+        <!-- body -->
+        <div class="chat-body">
+          <!-- "Before we talk" card -->
+          <div class="bw-card">
+            <div class="bw-head">
+              <span class="bw-title">Before we talk</span>
+              <span class="bw-x">✕</span>
+            </div>
+            <div class="bw-grid">
+              <div class="bw-cell">
+                <div class="ico">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z"/></svg>
+                </div>
+                <h6>Zero Data Retention</h6>
+                <p>Nothing you type is stored. Only anonymous counters — region, topic, language. Never your words.</p>
+              </div>
+              <div class="bw-cell alt">
+                <div class="ico">◆</div>
+                <h6>AI, not a professional</h6>
+                <p>NOVA is an AI companion built by Emanuel Figueroa. It is NOT a doctor, nurse or therapist, and does not replace professional care.</p>
+              </div>
+              <div class="bw-cell crit">
+                <div class="ico">●</div>
+                <h6>Crisis support</h6>
+                <p>If you are in immediate danger, please call 111. For 24/7 support: Lifeline 0800 543 354 or text/call 1737.</p>
+              </div>
+            </div>
+            <div class="bw-legal">NZ PRIVACY ACT 2020 · IPP 3A · HIPC 2020 · TE MANA RARAUNGA</div>
+            <div class="bw-cta">Understood, start talking ↓</div>
+          </div>
+
+          <!-- conversation -->
+          <div class="msg">
+            <div class="ava">N</div>
+            <div class="bub">Hey — how are you doing today?</div>
+          </div>
+          <div class="msg user">
+            <div class="bub">Hi, can you help me?</div>
+          </div>
+          <div class="msg thinking">
+            <div class="ava spark">✦</div>
+            <div class="bub">Nova is thinking</div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="chat-foot">
+          <div class="crisis-strip">
+            <span><b>111</b> emergency</span><span class="sep">|</span>
+            <span><i>Lifeline</i> 0800 543 354</span><span class="sep">|</span>
+            <span><i>1737</i> text or call</span>
+          </div>
+          <div class="chat-input">
+            <div class="ph">Share what's on your mind…</div>
+            <div class="send">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21 L23 12 L2 3 V10 L17 12 L2 14 Z"/></svg>
+            </div>
+          </div>
+          <div class="input-help">ENTER TO SEND · SHIFT+ENTER NEW LINE · <i>PRIVATE SESSION</i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operator analytics preview -->
+    <div class="nova-ops fade">
+      <div class="ops-top">
+        <div class="ops-brand">
+          <div class="ops-brand-mark">N</div>
+          <div>
+            <div class="ops-brand-name">Mātauranga <i>NOVA</i> · Analytics</div>
+            <div class="ops-brand-sub">Operator side · public reference data only</div>
+          </div>
+        </div>
+        <div class="ops-meta">
+          <span class="badge live">LIVE</span>
+          <span class="badge">HEALTH NZ 2025</span>
+        </div>
+      </div>
+
+      <div class="ops-tabs">
+        <span class="tab active"><span class="dot"></span>Command</span>
+        <span class="tab">○ Atlas</span>
+        <span class="tab gold">↗ Predictive</span>
+        <span class="tab">🛡 Privacy</span>
+        <span class="tab">● Status</span>
+      </div>
+
+      <div class="ops-body">
+        <!-- KPI strip from Command tab -->
+        <div class="ops-kpis">
+          <div class="kpi">
+            <div class="v">95</div>
+            <div class="l">HIV diagnoses 2024</div>
+            <div class="s">historic low</div>
+          </div>
+          <div class="kpi">
+            <div class="v">60</div>
+            <div class="l">Locally acquired</div>
+            <div class="s">NZ transmission</div>
+          </div>
+          <div class="kpi">
+            <div class="v">2,312</div>
+            <div class="l">On ART</div>
+            <div class="s up">95% suppressed</div>
+          </div>
+          <div class="kpi">
+            <div class="v">91%</div>
+            <div class="l">Know status</div>
+            <div class="s">target: 95%</div>
+          </div>
+          <div class="kpi">
+            <div class="v">5,200</div>
+            <div class="l">Gonorrhoea est.</div>
+            <div class="s alert">↑ rising</div>
+          </div>
+          <div class="kpi">
+            <div class="v">2030</div>
+            <div class="l">Zero target</div>
+            <div class="s">National plan</div>
+          </div>
+        </div>
+
+        <!-- Charts row -->
+        <div class="ops-charts">
+          <!-- HIV Trend line -->
+          <div class="ops-panel">
+            <h5>HIV Trend 2019–2024</h5>
+            <div class="sub">New diagnoses nationally · Source: Health NZ</div>
+            <svg viewBox="0 0 520 220" font-family="Manrope, sans-serif">
+              <!-- grid -->
+              <g stroke="#1a2218" stroke-width="1">
+                <line x1="40" y1="20"  x2="510" y2="20"/>
+                <line x1="40" y1="60"  x2="510" y2="60"/>
+                <line x1="40" y1="100" x2="510" y2="100"/>
+                <line x1="40" y1="140" x2="510" y2="140"/>
+                <line x1="40" y1="180" x2="510" y2="180"/>
+              </g>
+              <!-- y labels -->
+              <g font-size="9" fill="#5a6258" font-family="JetBrains Mono, monospace">
+                <text x="32" y="24" text-anchor="end">180</text>
+                <text x="32" y="64" text-anchor="end">140</text>
+                <text x="32" y="104" text-anchor="end">100</text>
+                <text x="32" y="144" text-anchor="end">60</text>
+                <text x="32" y="184" text-anchor="end">20</text>
+              </g>
+              <!-- x labels -->
+              <g font-size="9" fill="#7a8278" font-family="JetBrains Mono, monospace">
+                <text x="68"  y="200" text-anchor="middle">2019</text>
+                <text x="155" y="200" text-anchor="middle">2020</text>
+                <text x="242" y="200" text-anchor="middle">2021</text>
+                <text x="329" y="200" text-anchor="middle">2022</text>
+                <text x="416" y="200" text-anchor="middle">2023</text>
+                <text x="503" y="200" text-anchor="middle">2024</text>
+              </g>
+              <!-- area under curve -->
+              <path d="M68,38 C110,42 130,150 155,80 C200,158 220,158 242,170 C290,142 290,118 329,108 C380,80 390,40 416,40 C460,52 480,68 503,82 L503,180 L68,180 Z"
+                    fill="rgba(111,191,143,.12)"/>
+              <!-- main HIV line -->
+              <path class="draw" style="--len:600;" d="M68,38 C110,42 130,150 155,80 C200,158 220,158 242,170 C290,142 290,118 329,108 C380,80 390,40 416,40 C460,52 480,68 503,82"
+                    fill="none" stroke="#6FBF8F" stroke-width="2.4"/>
+              <!-- data points -->
+              <g fill="#0a0d0a" stroke="#6FBF8F" stroke-width="2">
+                <circle cx="68"  cy="38"  r="3.5"/>
+                <circle cx="155" cy="80"  r="3.5"/>
+                <circle cx="242" cy="170" r="3.5"/>
+                <circle cx="329" cy="108" r="3.5"/>
+                <circle cx="416" cy="40"  r="3.5"/>
+                <circle cx="503" cy="82"  r="3.5"/>
+              </g>
+              <!-- annotation -->
+              <g font-family="Instrument Serif, serif" font-size="11" fill="#6FBF8F" font-style="italic">
+                <text x="155" y="62">↓ COVID drop</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- STI Landscape bar -->
+          <div class="ops-panel">
+            <h5>STI Landscape 2024</h5>
+            <div class="sub">Estimated annual cases by disease</div>
+            <svg viewBox="0 0 360 220" font-family="Manrope, sans-serif">
+              <!-- y axis -->
+              <g stroke="#1a2218" stroke-width="1">
+                <line x1="40" y1="20"  x2="350" y2="20"/>
+                <line x1="40" y1="60"  x2="350" y2="60"/>
+                <line x1="40" y1="100" x2="350" y2="100"/>
+                <line x1="40" y1="140" x2="350" y2="140"/>
+                <line x1="40" y1="180" x2="350" y2="180"/>
+              </g>
+              <g font-size="9" fill="#5a6258" font-family="JetBrains Mono, monospace">
+                <text x="34" y="24"  text-anchor="end">8K</text>
+                <text x="34" y="64"  text-anchor="end">6K</text>
+                <text x="34" y="104" text-anchor="end">4K</text>
+                <text x="34" y="144" text-anchor="end">2K</text>
+                <text x="34" y="184" text-anchor="end">0</text>
+              </g>
+              <!-- bars (grow on scroll) -->
+              <g>
+                <!-- HIV 95 → barely visible at this scale -->
+                <rect class="grow-y" x="58" y="178" width="38" height="2" fill="#6FBF8F"/>
+                <!-- Syphilis 1800 -->
+                <rect class="grow-y" x="116" y="144" width="38" height="36" fill="#B68A3E"/>
+                <!-- Gonorrhoea 5200 -->
+                <rect class="grow-y" x="174" y="76" width="38" height="104" fill="#d3a13a"/>
+                <!-- Chlamydia 7800 -->
+                <rect class="grow-y" x="232" y="24" width="38" height="156" fill="#7e6cd6"/>
+                <!-- Mpox <50 -->
+                <rect class="grow-y" x="290" y="178" width="38" height="2" fill="#5a8fc7"/>
+              </g>
+              <!-- labels -->
+              <g font-size="9" fill="#a8aca0" font-family="Manrope, sans-serif">
+                <text x="77"  y="198" text-anchor="middle">HIV</text>
+                <text x="135" y="198" text-anchor="middle">Syphilis</text>
+                <text x="193" y="198" text-anchor="middle">Gonorrhoea</text>
+                <text x="251" y="198" text-anchor="middle">Chlamydia</text>
+                <text x="309" y="198" text-anchor="middle">Mpox</text>
+              </g>
+              <!-- values -->
+              <g font-size="9" fill="#E8E3D6" font-family="JetBrains Mono, monospace">
+                <text x="77"  y="172" text-anchor="middle">95</text>
+                <text x="135" y="138" text-anchor="middle">1.8K</text>
+                <text x="193" y="70"  text-anchor="middle">5.2K</text>
+                <text x="251" y="18"  text-anchor="middle">7.8K</text>
+                <text x="309" y="172" text-anchor="middle">&lt;50</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Regional Atlas cards -->
+        <div class="ops-regions">
+          <div class="region">
+            <div class="region-tag">NTH</div>
+            <div class="region-name">Northern · Te Tai Tokerau</div>
+            <div class="region-stats">
+              <div class="s"><div class="n">38</div><div class="lab">HIV 24</div></div>
+              <div class="s"><div class="n">920</div><div class="lab">On ART</div></div>
+              <div class="s sdhi"><div class="n">6.2</div><div class="lab">SDHI</div></div>
+            </div>
+            <div class="region-bar"><div class="fill" style="width:58%;"></div></div>
+            <div class="region-note">Healthcare access 6.1 / 10</div>
+          </div>
+          <div class="region warn">
+            <div class="region-tag">MID</div>
+            <div class="region-name">Midland · Te Manawa Taki</div>
+            <div class="region-stats">
+              <div class="s"><div class="n">22</div><div class="lab">HIV 24</div></div>
+              <div class="s"><div class="n">510</div><div class="lab">On ART</div></div>
+              <div class="s sdhi"><div class="n">7.1</div><div class="lab">SDHI</div></div>
+            </div>
+            <div class="region-bar"><div class="fill" style="width:72%;"></div></div>
+            <div class="region-note">High access gap — priority for outreach</div>
+          </div>
+          <div class="region">
+            <div class="region-tag">CEN</div>
+            <div class="region-name">Central · Te Ikaroa</div>
+            <div class="region-stats">
+              <div class="s"><div class="n">18</div><div class="lab">HIV 24</div></div>
+              <div class="s"><div class="n">440</div><div class="lab">On ART</div></div>
+              <div class="s sdhi"><div class="n">5.9</div><div class="lab">SDHI</div></div>
+            </div>
+            <div class="region-bar"><div class="fill" style="width:52%;"></div></div>
+            <div class="region-note">Healthcare access 5.4 / 10</div>
+          </div>
+          <div class="region crit">
+            <div class="region-tag">STH · CRITICAL</div>
+            <div class="region-name">Southern · Te Waipounamu</div>
+            <div class="region-stats">
+              <div class="s"><div class="n">17</div><div class="lab">HIV 24</div></div>
+              <div class="s"><div class="n">440</div><div class="lab">On ART</div></div>
+              <div class="s sdhi"><div class="n">7.8</div><div class="lab">SDHI</div></div>
+            </div>
+            <div class="region-bar"><div class="fill" style="width:84%;"></div></div>
+            <div class="region-note">Highest access gap nationally — outreach priority</div>
+          </div>
+        </div>
+
+        <!-- compliance footer -->
+        <div class="ops-foot">
+          <span><b>Public reference data only.</b> Conversational analytics never leave the session.</span>
+          <span>NZ Privacy Act 2020</span>
+          <span>HIPC 2020</span>
+          <span>Te Mana Raraunga</span>
+          <span>Zero data retention</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- freelance -->
+    <div style="margin-top:clamp(60px,8vw,100px); padding-top:48px; border-top:1px solid #2a2f29; display:grid; gap:24px; grid-template-columns:1fr; align-items:end;">
+      <div class="fade">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#9CB9A5; margin-bottom:12px;">05 — Freelance</div>
+        <h3 style="margin:0; font-family:'Instrument Serif',serif; font-size:clamp(28px,4vw,42px); line-height:1.05; color:#F0EBDD;">Dashboards &amp; reporting, on commission.</h3>
+        <p style="color:#A8AC9F; max-width:60ch; margin-top:14px; font-size:15px; line-height:1.65;">
+          Ongoing dashboard, reporting and data-cleaning work for small businesses &amp; consultants &mdash; sourced through Upwork. Plain-English scoping, fixed-price where possible.
+          <a href="https://www.upwork.com/freelancers/~0107d17418cb31f775" target="_blank" rel="noopener" style="color:#E8E3D6; border-bottom:1px solid #6FBF8F; padding-bottom:2px; margin-left:8px;">View Upwork profile ↗</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== CREDENTIALS ===================== -->
+<section id="credentials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">06</span><span>Credentials</span></h2>
+      <span class="aside">Honest split · qualifications vs. courses</span>
+    </div>
+
+    <div class="creds">
+      <div class="fade">
+        <h3>Qualifications <span class="tag">formal</span></h3>
+        <p class="cred-note">Awarded, accredited programmes.</p>
+        <ul class="cred-list">
+          <li>
+            <div class="cred-name">NZ Certificate in Project Management — Level 4</div>
+            <div class="cred-issuer">Open Polytechnic of New Zealand</div>
+          </li>
+          <li>
+            <div class="cred-name">Google Analytics (GA4) Certified</div>
+            <div class="cred-issuer">Google Skillshop <span class="sep">·</span> certification</div>
+          </li>
+          <li>
+            <div class="cred-name">Secondary Diploma in Business Administration</div>
+            <div class="cred-issuer">Argentina <span class="sep">·</span> 2007</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fade">
+        <h3>Professional development <span class="tag" style="color:var(--pounamu); border-color:var(--pounamu);">courses</span></h3>
+        <p class="cred-note">Short courses and continuing study &mdash; not certifications.</p>
+        <ul class="cred-list">
+          <li>
+            <div class="cred-name">Lean Six Sigma</div>
+            <div class="cred-issuer">LinkedIn Learning <span class="sep">·</span> Vanguard Consulting UK <span class="sep">·</span> course</div>
+          </li>
+          <li>
+            <div class="cred-name">Prompt Engineering for Developers</div>
+            <div class="cred-issuer">DeepLearning.AI <span class="sep">·</span> short course</div>
+          </li>
+          <li>
+            <div class="cred-name">Mental Health &amp; Community Wellbeing</div>
+            <div class="cred-issuer">University of Canterbury <span class="sep">·</span> online course</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS & CAREER ===================== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">07</span><span>Skills &amp; career</span></h2>
+      <span class="aside">What I do · where I&rsquo;ve done it</span>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skills-block fade">
+        <h4>The work</h4>
+        <p class="skill-flow">
+          <em>Operations</em> &amp; process improvement, project coordination, dashboard design &amp; data visualisation, reporting &amp; analytics, and <em>practical AI tooling</em>. <span>Fifteen-plus years of customer service running underneath all of it.</span>
+        </p>
+
+        <h4 style="margin-top:36px;">Tools</h4>
+        <div class="tool-grid">
+          <div class="tool">Tableau</div>
+          <div class="tool">GA4</div>
+          <div class="tool">Mapbox</div>
+          <div class="tool">React</div>
+          <div class="tool">Node.js</div>
+          <div class="tool">SQL (basic)</div>
+          <div class="tool">Git</div>
+          <div class="tool">Microsoft 365</div>
+          <div class="tool">SharePoint</div>
+          <div class="tool">Prompt engineering</div>
+          <div class="tool">AI-assisted dev</div>
+          <div class="tool">Plain-English docs</div>
+        </div>
+      </div>
+
+      <div class="skills-block fade">
+        <h4>Career — brief</h4>
+        <ul class="timeline">
+          <li>
+            <div class="yr mono">2022 — 23</div>
+            <div>
+              <div class="role">Warehouse &amp; Operations Coordinator</div>
+              <div class="at">Computer Dynamics</div>
+              <div class="desc">Inbound flow, stock accuracy, supplier coordination.</div>
+            </div>
+          </li>
+          <li>
+            <div class="yr mono">2018 — 22</div>
+            <div>
+              <div class="role">Sous Chef &amp; Team Lead</div>
+              <div class="at">Brother Beer</div>
+              <div class="desc">Service standards, training, kitchen ops &amp; rostering.</div>
+            </div>
+          </li>
+          <li>
+            <div class="yr mono">2017 — 18</div>
+            <div>
+              <div class="role">Founder &amp; Operations Manager</div>
+              <div class="at">Go Home Mover</div>
+              <div class="desc">Built and ran a small moving business end-to-end.</div>
+            </div>
+          </li>
+          <li>
+            <div class="yr mono">2011 — 15</div>
+            <div>
+              <div class="role">Concierge &amp; Events Coordination</div>
+              <div class="at">Château Libertador</div>
+              <div class="desc">Private events of 50–500 guests; led setup crews.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let&rsquo;s talk<em>.</em></h2>
+    <p class="contact-lead">Contract operations, dashboards, or an AI-tool prototype &mdash; happy to scope a coffee&rsquo;s worth of conversation first.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="label">Email</span>
+        <a class="val" href="mailto:emanuel.figueroa.alejandro@gmail.com">emanuel.figueroa.alejandro@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <span class="label">Phone</span>
+        <a class="val" href="tel:+64274541581">0274 541 581</a>
+      </div>
+      <div class="contact-card">
+        <span class="label">Based</span>
+        <span class="val">Auckland · Tāmaki Makaurau</span>
+      </div>
+      <div class="contact-card">
+        <span class="label">Languages</span>
+        <span class="val">English &amp; Español</span>
+      </div>
+    </div>
+
+    <div style="margin-top:48px; display:flex; flex-wrap:wrap; gap:24px 32px;">
+      <a class="work-link" href="https://public.tableau.com/app/profile/emanuel.figueroa" target="_blank" rel="noopener">Tableau Public <span class="arrow">↗</span></a>
+      <a class="work-link" href="https://www.upwork.com/freelancers/~0107d17418cb31f775" target="_blank" rel="noopener">Upwork <span class="arrow">↗</span></a>
+      <a class="work-link" href="https://www.linkedin.com/in/emanuel-f55739" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap foot-inner">
+    <span>© <span id="yr">2026</span> Emanuel Figueroa — Auckland NZ</span>
+    <span>Built by hand · single file · no trackers</span>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Scroll-reveal
+  const els = document.querySelectorAll('.fade');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // staggered for siblings in same parent
+          const peers = e.target.parentElement
+            ? Array.from(e.target.parentElement.querySelectorAll(':scope > .fade'))
+            : [];
+          const idx = peers.indexOf(e.target);
+          e.target.style.transitionDelay = (idx > -1 ? Math.min(idx * 90, 360) : 0) + 'ms';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('in'));
+  }
+
+  // Smooth anchor handling (respect reduced motion already on html)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  /* ============================================================
+     Scroll-linked dashboard animations
+     Each .work-vis exposes --p (0 → 1) based on how far it has
+     scrolled through the viewport. The CSS uses --p to grow bars,
+     draw lines, fade elements, etc.
+     ============================================================ */
+  (function(){
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const viss = document.querySelectorAll('.work-vis');
+    if (!viss.length) return;
+    if (reduced) {
+      viss.forEach(v => { v.style.setProperty('--p', '1'); v.classList.add('is-live'); });
+      return;
+    }
+    // initialise polyline draw lengths from actual geometry
+    document.querySelectorAll('.work-vis polyline.draw, .work-vis path.draw').forEach(el => {
+      try {
+        const len = el.getTotalLength();
+        if (len && isFinite(len)) el.style.setProperty('--len', len.toFixed(0));
+      } catch(e){}
+    });
+
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      viss.forEach(el => {
+        const r = el.getBoundingClientRect();
+        // progress: 0 when top of element at bottom of viewport, 1 when bottom of element at top
+        const total = r.height + vh;
+        let p = (vh - r.top) / total;
+        // ease the middle so the dashboard "plays" through the centre
+        p = Math.max(0, Math.min(1, p));
+        // bias so the animation completes by the time the dashboard is centred
+        const biased = Math.max(0, Math.min(1, (p - 0.18) / 0.55));
+        el.style.setProperty('--p', biased.toFixed(3));
+        if (biased > 0.05 && biased < 0.98) el.classList.add('is-live');
+      });
+    }
+    function onScroll(){
+      if (!ticking){ requestAnimationFrame(update); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  /* ============================================================
+     Nova chat constellation — animated network of dots & lines
+     ============================================================ */
+  (function(){
+    const cv = document.getElementById('novaStars');
+    if (!cv) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = cv.getContext('2d');
+    let W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1);
+    let pts = [];
+    function resize(){
+      const rect = cv.parentElement.getBoundingClientRect();
+      W = Math.max(200, rect.width);
+      H = Math.max(300, rect.height);
+      cv.width = Math.floor(W * dpr);
+      cv.height = Math.floor(H * dpr);
+      cv.style.width = W + 'px';
+      cv.style.height = H + 'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      // density: ~1 dot per 4500px²
+      const n = Math.max(28, Math.min(80, Math.floor(W*H/5000)));
+      pts = [];
+      for (let i=0; i<n; i++){
+        pts.push({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          vx: (Math.random()-0.5)*0.18,
+          vy: (Math.random()-0.5)*0.18,
+          r: Math.random()*1.4 + 0.6,
+          gold: Math.random() < 0.18
+        });
+      }
+    }
+    resize();
+    let pausedUntilVisible = false;
+    let inView = true;
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=> inView = e.isIntersecting);
+    });
+    io.observe(cv.parentElement);
+    window.addEventListener('resize', resize);
+
+    function tick(){
+      if (!inView){ requestAnimationFrame(tick); return; }
+      ctx.clearRect(0,0,W,H);
+      // move
+      for (const p of pts){
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -10) p.x = W+10; else if (p.x > W+10) p.x = -10;
+        if (p.y < -10) p.y = H+10; else if (p.y > H+10) p.y = -10;
+      }
+      // connect
+      ctx.lineWidth = 0.5;
+      const maxD = Math.min(120, W*0.18);
+      for (let i=0; i<pts.length; i++){
+        const a = pts[i];
+        for (let j=i+1; j<pts.length; j++){
+          const b = pts[j];
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const d2 = dx*dx + dy*dy;
+          if (d2 < maxD*maxD){
+            const alpha = 0.35 * (1 - Math.sqrt(d2)/maxD);
+            ctx.strokeStyle = `rgba(111,191,143,${alpha.toFixed(3)})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // dots
+      for (const p of pts){
+        ctx.fillStyle = p.gold ? '#B68A3E' : '#6FBF8F';
+        ctx.shadowColor = p.gold ? 'rgba(182,138,62,.6)' : 'rgba(111,191,143,.5)';
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+      requestAnimationFrame(tick);
+    }
+    if (reduced){
+      // draw a single static frame
+      tick();
+    } else {
+      requestAnimationFrame(tick);
+    }
+  })();
+</script>
+
+</body>
+</html>
